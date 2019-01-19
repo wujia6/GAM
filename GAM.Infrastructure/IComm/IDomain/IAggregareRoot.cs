@@ -1,4 +1,4 @@
-﻿namespace GAM.Domain.IDataAccess
+﻿namespace GAM.Infrastructure.IComm.IDomain
 {
     public interface IAggregareRoot
     {

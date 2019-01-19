@@ -57,6 +57,6 @@ namespace GAM.Domain.Entities
         /// <summary>
         /// 导航属性
         /// </summary>
-        //public virtual RoleMenu RoleMenu { get; set; } = new RoleMenu();
+        public virtual RoleMenu RoleMenu { get; set; } = new RoleMenu();
     }
 }

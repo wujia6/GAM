@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 
-namespace GAM.Domain.IDataAccess
+namespace GAM.Infrastructure.IComm.IDomain
 {
     public interface IRepository<T> where T: class, IAggregareRoot
     {
@@ -17,7 +17,7 @@ namespace GAM.Domain.IDataAccess
 
         T Find(Expression<Func<T, bool>> filter);
 
-        IQueryable<T> Query(Func<ISet<T>, IQueryable<T>> include = null, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null);
+        IQueryable<T> Query(Func<DbSet<T>, IQueryable<T>> include = null, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null);
 
         IQueryable<T> Query(int index, int size, out int total, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null);
     }

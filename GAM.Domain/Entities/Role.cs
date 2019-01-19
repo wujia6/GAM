@@ -39,12 +39,12 @@ namespace GAM.Domain.Entities
         /// <summary>
         /// 包含用户
         /// </summary>
-        public virtual IQueryable<User> Users { get; set; }
+        public virtual IQueryable<UserRole> UserRoles { get; set; }
 
         /// <summary>
         /// 包含菜单项
         /// </summary>
-        public virtual IQueryable<Menu> Menus { get; set; }
+        public virtual IQueryable<RoleMenu> RoleMenus { get; set; }
     }
 
     /// <summary>

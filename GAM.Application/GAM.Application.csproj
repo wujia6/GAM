@@ -6,7 +6,10 @@
 
   <ItemGroup>
     <Folder Include="Service\" />
-    <Folder Include="IDomainService\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GAM.Infrastructure\GAM.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
