@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GAM.Infrastructure.IComm.IDomain
+namespace GAM.Domain
 {
     public interface IUnitOfWork: IDisposable
     {

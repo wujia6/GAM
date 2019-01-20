@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using GAM.Domain.IDataAccess;
+using GAM.Infrastructure.IComm;
 
 namespace GAM.Domain.Entities
 {
@@ -45,13 +45,5 @@ namespace GAM.Domain.Entities
         /// 包含菜单项
         /// </summary>
         public virtual IQueryable<RoleMenu> RoleMenus { get; set; }
-    }
-
-    /// <summary>
-    /// 角色领域业务逻辑
-    /// </summary>
-    public partial class Role
-    {
-
     }
 }

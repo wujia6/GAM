@@ -3,13 +3,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
-namespace GAM.Infrastructure.IComm.IDomain
+namespace GAM.Infrastructure.IComm
 {
-    public interface IRepository<T> where T: class, IAggregareRoot
+    public interface IRepository<T> where T: class
     {
         bool Insert(T entity);
 
-        bool Delete(int id);
+        bool Delete(T entity);
 
         bool Update(T entity);
 

@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Service\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\GAM.Domain\GAM.Domain.csproj" />
     <ProjectReference Include="..\GAM.Infrastructure\GAM.Infrastructure.csproj" />
   </ItemGroup>
 

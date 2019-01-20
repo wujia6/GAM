@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using GAM.Infrastructure.IComm.IDomain;
+﻿using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -11,7 +7,7 @@ namespace GAM.Domain.Entities
     public class EFCoreContext: DbContext, IUnitOfWork
     {
         //方式1
-        public EFCoreContext(DbContextOptions<EFCoreContext> options) : base(options) { }
+        //public EFCoreContext(DbContextOptions<EFCoreContext> options) : base(options) { }
 
         //方式2
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

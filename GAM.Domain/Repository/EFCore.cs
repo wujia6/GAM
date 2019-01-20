@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using GAM.Infrastructure.IComm;
 using Microsoft.EntityFrameworkCore;
 
-namespace GAM.Infrastructure.EntityFarmeworkCore
+namespace GAM.Domain.Repository
 {
-    public class EFCoreRepository<T> : IRepository<T> where T: class
+    internal abstract class EFCore<T> : IRepository<T> where T: class
     {
         //数据上下文
         private readonly DbContext objContext;
 
         //构造函数
-        public EFCoreRepository(DbContext context)
+        public EFCore(DbContext context)
         {
             objContext = context;
         }
@@ -27,7 +26,7 @@ namespace GAM.Infrastructure.EntityFarmeworkCore
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool Delete(T entity)
+        public virtual bool Delete(T entity)
         {
             objContext.Entry<T>(entity).State = EntityState.Deleted;
             return true;
@@ -38,7 +37,7 @@ namespace GAM.Infrastructure.EntityFarmeworkCore
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public bool Update(T entity)
+        public virtual bool Update(T entity)
         {
             objContext.Attach(entity);
             objContext.Entry<T>(entity).State = EntityState.Modified;
@@ -50,7 +49,7 @@ namespace GAM.Infrastructure.EntityFarmeworkCore
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public bool Insert(T entity)
+        public virtual bool Insert(T entity)
         {
             objContext.Entry<T>(entity).State = EntityState.Added;
             return true;
@@ -61,7 +60,7 @@ namespace GAM.Infrastructure.EntityFarmeworkCore
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public T Find(int id)
+        public virtual T Find(int id)
         {
             return TSet.Find(id);
         }
@@ -71,7 +70,7 @@ namespace GAM.Infrastructure.EntityFarmeworkCore
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public T Find(Expression<Func<T, bool>> filter)
+        public virtual T Find(Expression<Func<T, bool>> filter)
         {
             return TSet.FirstOrDefault(filter);
         }
@@ -83,7 +82,7 @@ namespace GAM.Infrastructure.EntityFarmeworkCore
         /// <param name="filter"></param>
         /// <param name="orderby"></param>
         /// <returns></returns>
-        public IQueryable<T> Query(
+        public virtual IQueryable<T> Query(
             Func<DbSet<T>, IQueryable<T>> include = null, 
             Expression<Func<T, bool>> filter = null, 
             Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null)
@@ -106,7 +105,7 @@ namespace GAM.Infrastructure.EntityFarmeworkCore
         /// <param name="filter"></param>
         /// <param name="orderby"></param>
         /// <returns></returns>
-        public IQueryable<T> Query(
+        public virtual IQueryable<T> Query(
             int index, 
             int size, 
             out int total, 
