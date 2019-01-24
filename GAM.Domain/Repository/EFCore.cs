@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using GAM.Domain.IComm;
+using GAM.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace GAM.Domain.Repository
 {
-    internal abstract class EFCore<T> : IRepository<T> where T: class
+    internal class EFCore<T> : IRepository<T> where T: class, IAggregareRoot
     {
         //数据上下文
-        private readonly DbContext objContext;
+        private readonly EFCoreContext objContext;
 
         //构造函数
-        public EFCore(DbContext context)
+        public EFCore(EFCoreContext context)
         {
             objContext = context;
         }
@@ -21,23 +23,26 @@ namespace GAM.Domain.Repository
         /// </summary>
         private DbSet<T> TSet => objContext.Set<T>();
 
+        //获取IQueryable<T>集合对象
+        public IQueryable<T> DbEntity => TSet.AsQueryable();
+
         /// <summary>
-        /// 
+        /// 删除
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public virtual bool Delete(T entity)
+        public bool Delete(T entity)
         {
             objContext.Entry<T>(entity).State = EntityState.Deleted;
             return true;
         }
 
         /// <summary>
-        /// 
+        /// 更新
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual bool Update(T entity)
+        public bool Update(T entity)
         {
             objContext.Attach(entity);
             objContext.Entry<T>(entity).State = EntityState.Modified;
@@ -45,44 +50,44 @@ namespace GAM.Domain.Repository
         }
 
         /// <summary>
-        /// 
+        /// 插入
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual bool Insert(T entity)
+        public bool Insert(T entity)
         {
             objContext.Entry<T>(entity).State = EntityState.Added;
             return true;
         }
 
         /// <summary>
-        /// 
+        /// 查找
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public virtual T Find(int id)
+        public T Find(int id)
         {
             return TSet.Find(id);
         }
 
         /// <summary>
-        /// 
+        /// 查找
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public virtual T Find(Expression<Func<T, bool>> filter)
+        public T Find(Expression<Func<T, bool>> filter)
         {
             return TSet.FirstOrDefault(filter);
         }
 
         /// <summary>
-        /// 
+        /// 查询
         /// </summary>
         /// <param name="include"></param>
         /// <param name="filter"></param>
         /// <param name="orderby"></param>
         /// <returns></returns>
-        public virtual IQueryable<T> Query(
+        public IQueryable<T> Query(
             Func<DbSet<T>, IQueryable<T>> include = null, 
             Expression<Func<T, bool>> filter = null, 
             Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null)
@@ -97,7 +102,7 @@ namespace GAM.Domain.Repository
         }
 
         /// <summary>
-        /// 
+        /// 查询
         /// </summary>
         /// <param name="index"></param>
         /// <param name="size"></param>
@@ -105,7 +110,7 @@ namespace GAM.Domain.Repository
         /// <param name="filter"></param>
         /// <param name="orderby"></param>
         /// <returns></returns>
-        public virtual IQueryable<T> Query(
+        public IQueryable<T> Query(
             int index, 
             int size, 
             out int total, 

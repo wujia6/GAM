@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GAM.Domain.Entities
 {
@@ -8,55 +10,41 @@ namespace GAM.Domain.Entities
     /// </summary>
     public class Menu
     {
-        /// <summary>
-        /// 主键ID
-        /// </summary>
-        [Key]
         public int ID { get; set; }
-
-        /// <summary>
-        /// 父级ID
-        /// </summary>
         public Guid ParentId { get; set; }
-
-        /// <summary>
-        /// 序号
-        /// </summary>
         public int SerialNumber { get; set; }
-
-        /// <summary>
-        /// 菜单名称
-        /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// 菜单编码
-        /// </summary>
         public string Code { get; set; }
-
-        /// <summary>
-        /// 菜单地址
-        /// </summary>
         public string Url { get; set; }
-
-        /// <summary>
-        /// 类型：0导航菜单；1操作按钮。
-        /// </summary>
         public int Type { get; set; }
-
-        /// <summary>
-        /// 菜单图标
-        /// </summary>
         public string Icon { get; set; }
-
-        /// <summary>
-        /// 菜单备注
-        /// </summary>
         public string Remarks { get; set; }
         
-        /// <summary>
-        /// 导航属性
-        /// </summary>
+        //导航属性
         public virtual RoleMenu RoleMenu { get; set; } = new RoleMenu();
+    }
+
+    public enum MenuType
+    {
+        
+    }
+
+    /// <summary>
+    /// Menu表映射类
+    /// </summary>
+    public class MenuConfig : IEntityTypeConfiguration<Menu>
+    {
+        public void Configure(EntityTypeBuilder<Menu> b)
+        {
+            b.HasKey(e => e.ID);
+            b.Property(e => e.ParentId).IsRequired();
+            b.Property(e => e.SerialNumber).IsRequired();
+            b.Property(e => e.Name).IsRequired().HasMaxLength(30);
+            b.Property(e => e.Code).IsRequired().HasMaxLength(30);
+            b.Property(e => e.Url).IsRequired().HasMaxLength(50);
+            b.Property(e => e.Type).IsRequired();
+            b.Property(e => e.Icon).IsRequired().HasMaxLength(50);
+            b.Property(e => e.Remarks).IsRequired().HasMaxLength(100);
+        }
     }
 }

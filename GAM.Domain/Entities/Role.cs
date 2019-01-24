@@ -2,48 +2,37 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using GAM.Infrastructure.IComm;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GAM.Domain.Entities
 {
     /// <summary>
     /// 角色领域模型
     /// </summary>
-    public partial class Role: IAggregareRoot
+    public class Role: IAggregareRoot
     {
-        /// <summary>
-        /// 主键ID
-        /// </summary>
-        [Key]
         public int ID { get; set; }
-
-        /// <summary>
-        /// 角色代码
-        /// </summary>
         public string Code { get; set; }
-
-        /// <summary>
-        /// 角色名称
-        /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// 创建时间
-        /// </summary>
         public DateTime? CreateTime { get; set; }
-
-        /// <summary>
-        /// 备注
-        /// </summary>
         public string Remarks { get; set; }
 
-        /// <summary>
-        /// 包含用户
-        /// </summary>
+        //导航属性
         public virtual IQueryable<UserRole> UserRoles { get; set; }
-
-        /// <summary>
-        /// 包含菜单项
-        /// </summary>
         public virtual IQueryable<RoleMenu> RoleMenus { get; set; }
+    }
+
+    //RoleConfig
+    public class RoleConfig : IEntityTypeConfiguration<Role>
+    {
+        public void Configure(EntityTypeBuilder<Role> b)
+        {
+            b.HasKey(e=>e.ID);
+            b.Property(e=>e.Code).IsRequired().HasMaxLength(50);
+            b.Property(e=>e.Name).IsRequired().HasMaxLength(20);
+            b.Property(e=>e.CreateTime).HasColumnType("DateTime").HasDefaultValue(DateTime.Now);
+            b.Property(e=>e.Remarks).HasMaxLength(100);
+        }
     }
 }

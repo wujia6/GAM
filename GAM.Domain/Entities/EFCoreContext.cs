@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using GAM.Domain.IComm;
 
 namespace GAM.Domain.Entities
 {
@@ -19,12 +20,12 @@ namespace GAM.Domain.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasOne(e => e.Department).WithMany(e => e.Users);
-            modelBuilder.Entity<UserRole>().HasKey(e => new object[] { e.Role.ID, e.User.ID });
-            modelBuilder.Entity<UserRole>().HasOne(e => e.Role).WithMany(e => e.UserRoles).HasForeignKey(e=>e.Role.ID);
-            modelBuilder.Entity<UserRole>().HasOne(e => e.User).WithMany(e => e.UserRoles).HasForeignKey(e=>e.User.ID);
-            modelBuilder.Entity<RoleMenu>().HasOne(e => e.Role).WithMany(e => e.RoleMenus).HasForeignKey(e => e.Role.ID);
-            modelBuilder.Entity<RoleMenu>().HasOne(e => e.Menu).WithOne(e => e.RoleMenu).HasForeignKey<RoleMenu>(e => e.Menu.ID);
+            modelBuilder.ApplyConfiguration(new UserConfig());
+            modelBuilder.ApplyConfiguration(new DepartmentConfig());
+            modelBuilder.ApplyConfiguration(new MenuConfig());
+            modelBuilder.ApplyConfiguration(new RoleConfig());
+            modelBuilder.ApplyConfiguration(new RoleMenuConfig());
+            modelBuilder.ApplyConfiguration(new UserRoleConfig());
             base.OnModelCreating(modelBuilder);
         }
 

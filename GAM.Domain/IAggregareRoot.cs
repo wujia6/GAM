@@ -1,6 +1,4 @@
 ﻿namespace GAM.Domain
 {
-    public interface IAggregareRoot
-    {
-    }
+    public interface IAggregareRoot { }
 }
