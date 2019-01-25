@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using GAM.Domain.Entities;
-using GAM.Domain.IRepository;
+using GAM.Domain.IComm;
 using Microsoft.EntityFrameworkCore;
 
 namespace GAM.Domain.Repository
 {
-    internal class RoleRepository
+    internal class RoleRepository: IRoleRepos
     {
         private readonly IRepository<Role> iRepos;
 

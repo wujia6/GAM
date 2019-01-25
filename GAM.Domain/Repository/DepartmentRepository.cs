@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using GAM.Domain.Entities;
-using GAM.Domain.IRepository;
+using GAM.Domain.IComm;
 
 namespace GAM.Domain.Repository
 {

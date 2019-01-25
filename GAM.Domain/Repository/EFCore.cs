@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using GAM.Domain.IComm;
-using GAM.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using GAM.Domain.Entities;
+using GAM.Domain.IComm;
 
 namespace GAM.Domain.Repository
 {
@@ -94,9 +94,8 @@ namespace GAM.Domain.Repository
         {
             include?.Invoke(TSet);
             if (filter!=null)
-            {
                 TSet.Where(filter);
-            }
+            
             orderby?.Invoke(TSet);
             return TSet.AsQueryable();
         }

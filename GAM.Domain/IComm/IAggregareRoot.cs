@@ -1,4 +1,4 @@
-﻿namespace GAM.Domain
+﻿namespace GAM.Domain.IComm
 {
     public interface IAggregareRoot { }
 }

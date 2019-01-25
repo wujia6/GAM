@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
+using GAM.Domain.IComm;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using GAM.Domain.IComm;
 
 namespace GAM.Domain.Entities
 {

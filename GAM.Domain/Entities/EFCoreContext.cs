@@ -1,7 +1,7 @@
 ﻿using System.IO;
+using GAM.Domain.IComm;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using GAM.Domain.IComm;
 
 namespace GAM.Domain.Entities
 {

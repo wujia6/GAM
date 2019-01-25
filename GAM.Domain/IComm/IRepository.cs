@@ -3,9 +3,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
-namespace GAM.Domain
+namespace GAM.Domain.IComm
 {
-    public interface IRepository<T> where T: class
+    public interface IRepository<T> where T: class, IAggregareRoot
     {
         bool Insert(T entity);
 
