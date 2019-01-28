@@ -23,9 +23,12 @@ namespace GAM.Domain.Repository
         /// </summary>
         private DbSet<T> TSet => objContext.Set<T>();
 
-        //获取IQueryable<T>集合对象
+        /// <summary>
+        /// 获取IQueryable<T>集合对象
+        /// </summary>
         public IQueryable<T> DbEntity => TSet.AsQueryable();
 
+        #region ##接口实现
         /// <summary>
         /// 删除
         /// </summary>
@@ -80,6 +83,13 @@ namespace GAM.Domain.Repository
             return TSet.FirstOrDefault(filter);
         }
 
+        public T Find(Expression<Func<T, bool>> filter, Expression<Func<T, object>> include = null)
+        {
+            if (include != null)
+                TSet.Include(include);
+            return TSet.FirstOrDefault(filter);
+        }
+
         /// <summary>
         /// 查询
         /// </summary>
@@ -88,11 +98,13 @@ namespace GAM.Domain.Repository
         /// <param name="orderby"></param>
         /// <returns></returns>
         public IQueryable<T> Query(
-            Func<DbSet<T>, IQueryable<T>> include = null, 
+            Expression<Func<T, object>> include = null, 
             Expression<Func<T, bool>> filter = null, 
             Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null)
         {
-            include?.Invoke(TSet);
+            if (include != null)
+                TSet.Include(include);
+
             if (filter!=null)
                 TSet.Where(filter);
             
@@ -122,5 +134,6 @@ namespace GAM.Domain.Repository
             total = TSet.Count();
             return TSet.Skip((index - 1) * size).Take(size).AsQueryable();
         }
+        #endregion
     }
 }
