@@ -6,9 +6,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GAM.Domain.Entities
 {
-    /// <summary>
-    /// 部门实体
-    /// </summary>
     public class Department: IAggregareRoot
     {
         public int ID { get; set; }

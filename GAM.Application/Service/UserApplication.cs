@@ -8,19 +8,32 @@ namespace GAM.Application.Service
     {
         private readonly IUserService iService;
 
-        public UserApplication(IUserService iUser)
+        private readonly IUnitOfWork iUnitWork;
+
+        public UserApplication(EFCoreContext context, IUserService iUser)
         {
             this.iService = iUser;
+            this.iUnitWork = context as IUnitOfWork;
         }
 
         public User UserLogin(string account, string password)
         {
-            throw new System.NotImplementedException();
+            return iService.UserLogin(account,password);
         }
 
         public bool UserRegister(User entity)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                if(!iService.UserRegister(entity))
+                    return false;
+                iUnitWork.SaveChanges();
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
