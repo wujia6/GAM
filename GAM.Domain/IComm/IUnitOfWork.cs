@@ -7,6 +7,6 @@ namespace GAM.Domain.IComm
     {
         int SaveChanges();
 
-        Task SaveChangesAsync();
+        //Task<int> SaveChangesAsync();
     }
 }
