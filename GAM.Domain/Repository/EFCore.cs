@@ -12,16 +12,14 @@ namespace GAM.Domain.Repository
     {
         //数据上下文
         private readonly EFCoreContext objContext;
-
         //构造函数
         public EFCore(EFCoreContext context)
         {
             objContext = context;
         }
-        
+
         //表映射
         private DbSet<T> TSet => objContext.Set<T>();
-
         //获取IQueryable<T>集合对象
         public IQueryable<T> DbEntity => TSet.AsQueryable();
 

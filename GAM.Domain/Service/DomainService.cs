@@ -31,9 +31,7 @@ namespace GAM.Domain.Service
 
         public bool Edit(T entity)
         {
-            if (entity == null)
-                return false;
-            return iRepos.Update(entity);
+            return entity == null ? false : iRepos.Update(entity);
         }
 
         public T Single(int id)

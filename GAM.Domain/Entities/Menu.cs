@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GAM.Domain.Entities
@@ -9,15 +8,13 @@ namespace GAM.Domain.Entities
     /// </summary>
     public class Menu: BaseEntity
     {
-        //public int ID { get; set; }
-        public Guid ParentId { get; set; }
+        public int ParentId { get; set; }
         public int SerialNumber { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public string Url { get; set; }
-        public int Type { get; set; }
+        public MenuType Type { get; set; }
         public string Icon { get; set; }
-        //public string Remarks { get; set; }
         
         //导航属性
         public virtual RoleMenu RoleMenu { get; set; } = new RoleMenu();
@@ -25,7 +22,9 @@ namespace GAM.Domain.Entities
 
     public enum MenuType
     {
-        
+        menu = 1,
+        action = 2,
+        button = 3
     }
 
     /// <summary>
@@ -41,9 +40,9 @@ namespace GAM.Domain.Entities
             b.Property(e => e.Name).IsRequired().HasMaxLength(30);
             b.Property(e => e.Code).IsRequired().HasMaxLength(30);
             b.Property(e => e.Url).IsRequired().HasMaxLength(50);
-            b.Property(e => e.Type).IsRequired();
-            b.Property(e => e.Icon).IsRequired().HasMaxLength(50);
-            b.Property(e => e.Remarks).IsRequired().HasMaxLength(100);
+            b.Property(e => e.Type).HasDefaultValue(1).IsRequired();
+            b.Property(e => e.Icon).HasMaxLength(50).HasDefaultValue("none");
+            b.Property(e => e.Remarks).HasMaxLength(100);
         }
     }
 }
