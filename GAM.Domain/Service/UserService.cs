@@ -5,21 +5,23 @@ namespace GAM.Domain.Service
 {
     internal class UserService: IUserService
     {
-        private readonly IUserRepos iUserRepos;
+        private readonly IRepository<User> iUserRepos;
 
-        public UserService(IUserRepos irepos)
+        public UserService(IRepository<User> irepos)
         {
             this.iUserRepos = irepos;
         }
 
-        public User UserLogin(string account, string password)
-        {
-            return iUserRepos.SignIn(account,password);
-        }
-
-        public bool UserRegister(User entity)
+        public User SignIn(string account, string password, string inputcode)
         {
             throw new System.NotImplementedException();
+            //µÇÂ¼ÒµÎñÂß¼­
+        }
+
+        public bool Register(User entity)
+        {
+            throw new System.NotImplementedException();
+            //×¢²áÒµÎñÂß¼­
         }
     }
 }

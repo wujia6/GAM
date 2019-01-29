@@ -83,6 +83,12 @@ namespace GAM.Domain.Repository
             return TSet.FirstOrDefault(filter);
         }
 
+        /// <summary>
+        /// 查找指定条件实体
+        /// </summary>
+        /// <param name="filter">过滤条件</param>
+        /// <param name="include">外键表达式</param>
+        /// <returns>T</returns>
         public T Find(Expression<Func<T, bool>> filter, Expression<Func<T, object>> include = null)
         {
             if (include != null)

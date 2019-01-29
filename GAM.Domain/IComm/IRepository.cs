@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace GAM.Domain.IComm
 {
@@ -24,7 +22,7 @@ namespace GAM.Domain.IComm
         T Find(Expression<Func<T, bool>> filter, Expression<Func<T, object>> include = null);
 
         IQueryable<T> Query(
-            Func<DbSet<T>, IQueryable<T>> include = null,
+            Expression<Func<T, object>> include = null,
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null);
 

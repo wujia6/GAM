@@ -16,16 +16,16 @@ namespace GAM.Application.Service
             this.iUnitWork = context as IUnitOfWork;
         }
 
-        public User UserLogin(string account, string password)
+        public User UserLogin(string account, string password, string inputcode)
         {
-            return iService.UserLogin(account,password);
+            return iService.SignIn(account,password,inputcode);
         }
 
         public bool UserRegister(User entity)
         {
             try
             {
-                if(!iService.UserRegister(entity))
+                if(!iService.Register(entity))
                     return false;
                 iUnitWork.SaveChanges();
                 return true;

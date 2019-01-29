@@ -4,8 +4,8 @@ namespace GAM.Domain.IComm
 {
     public interface IUserService
     {
-        User UserLogin(string account,string password);
+        User SignIn(string account, string password, string validatecode);
 
-        bool UserRegister(User entity);
+        bool Register(User entity);
     }
 }
