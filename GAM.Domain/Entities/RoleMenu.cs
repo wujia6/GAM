@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GAM.Domain.Entities
 {
-    public class RoleMenu
+    public class RoleMenu: BaseEntity
     {
         public virtual Role Role { get; set; } = new Role();
         public virtual Menu Menu { get; set; } = new Menu();

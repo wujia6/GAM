@@ -6,15 +6,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GAM.Domain.Entities
 {
-    public class Department: IAggregareRoot
+    public class Department: BaseEntity, IAggregareRoot
     {
-        public int ID { get; set; }
+        //public int ID { get; set; }
         public int ParentId { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public string Manager { get; set; }
         public string ContactNumber { get; set; }
-        public string Remarks { get; set; }
+        //public string Remarks { get; set; }
         public DateTime? CreateTime { get; set; }
         public bool IsDeleted { get; set; }
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GAM.Domain.Entities
 {
-    public class UserRole
+    public class UserRole: BaseEntity
     {
         public virtual Role Role { get; set; } = new Role();
         public virtual User User { get; set; } = new User();

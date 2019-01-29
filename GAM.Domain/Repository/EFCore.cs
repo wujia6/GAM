@@ -4,10 +4,11 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using GAM.Domain.Entities;
 using GAM.Domain.IComm;
+using System.Threading.Tasks;
 
 namespace GAM.Domain.Repository
 {
-    internal class EFCore<T> : IRepository<T> where T: class, IAggregareRoot
+    internal class EFCore<T> : IRepository<T> where T: BaseEntity, IAggregareRoot
     {
         //数据上下文
         private readonly EFCoreContext objContext;
@@ -17,92 +18,45 @@ namespace GAM.Domain.Repository
         {
             objContext = context;
         }
-
-        /// <summary>
-        /// 表映射对象
-        /// </summary>
+        
+        //表映射
         private DbSet<T> TSet => objContext.Set<T>();
 
-        /// <summary>
-        /// 获取IQueryable<T>集合对象
-        /// </summary>
+        //获取IQueryable<T>集合对象
         public IQueryable<T> DbEntity => TSet.AsQueryable();
 
-        #region ##接口实现
-        /// <summary>
-        /// 删除
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        #region ##同步
         public bool Delete(T entity)
         {
             objContext.Entry<T>(entity).State = EntityState.Deleted;
             return true;
         }
-
-        /// <summary>
-        /// 更新
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
+        
         public bool Update(T entity)
         {
             objContext.Attach(entity);
-            objContext.Entry<T>(entity).State = EntityState.Modified;
+            objContext.Entry(entity).State = EntityState.Modified;
             return true;
         }
-
-        /// <summary>
-        /// 插入
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
+        
         public bool Insert(T entity)
         {
-            objContext.Entry<T>(entity).State = EntityState.Added;
+            objContext.Entry(entity).State = EntityState.Added;
             return true;
         }
-
-        /// <summary>
-        /// 查找
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        
         public T Find(int id)
         {
             return TSet.Find(id);
         }
-
-        /// <summary>
-        /// 查找
-        /// </summary>
-        /// <param name="filter"></param>
-        /// <returns></returns>
-        public T Find(Expression<Func<T, bool>> filter)
-        {
-            return TSet.FirstOrDefault(filter);
-        }
-
-        /// <summary>
-        /// 查找指定条件实体
-        /// </summary>
-        /// <param name="filter">过滤条件</param>
-        /// <param name="include">外键表达式</param>
-        /// <returns>T</returns>
+        
         public T Find(Expression<Func<T, bool>> filter, Expression<Func<T, object>> include = null)
         {
             if (include != null)
                 TSet.Include(include);
             return TSet.FirstOrDefault(filter);
         }
-
-        /// <summary>
-        /// 查询
-        /// </summary>
-        /// <param name="include"></param>
-        /// <param name="filter"></param>
-        /// <param name="orderby"></param>
-        /// <returns></returns>
+        
         public IQueryable<T> Query(
             Expression<Func<T, object>> include = null, 
             Expression<Func<T, bool>> filter = null, 
@@ -117,16 +71,7 @@ namespace GAM.Domain.Repository
             orderby?.Invoke(TSet);
             return TSet.AsQueryable();
         }
-
-        /// <summary>
-        /// 查询
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="size"></param>
-        /// <param name="total"></param>
-        /// <param name="filter"></param>
-        /// <param name="orderby"></param>
-        /// <returns></returns>
+        
         public IQueryable<T> Query(
             int index, 
             int size, 
@@ -139,6 +84,43 @@ namespace GAM.Domain.Repository
             orderby?.Invoke(TSet);
             total = TSet.Count();
             return TSet.Skip((index - 1) * size).Take(size).AsQueryable();
+        }
+        #endregion
+
+        #region ##异步
+        public Task<bool> InsertAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> FindAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> FindAsync(Expression<Func<T, bool>> filter, Expression<Func<T, object>> include = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IQueryable<T>> QueryAsync(Expression<Func<T, object>> include = null, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IQueryable<T>> QueryAsync(int index, int size, out int total, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

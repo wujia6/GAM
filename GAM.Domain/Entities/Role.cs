@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using GAM.Domain.IComm;
 using Microsoft.EntityFrameworkCore;
@@ -10,13 +9,13 @@ namespace GAM.Domain.Entities
     /// <summary>
     /// 角色领域模型
     /// </summary>
-    public class Role: IAggregareRoot
+    public class Role: BaseEntity, IAggregareRoot
     {
-        public int ID { get; set; }
+        //public int ID { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
         public DateTime? CreateTime { get; set; }
-        public string Remarks { get; set; }
+        //public string Remarks { get; set; }
 
         //导航属性
         public virtual IQueryable<UserRole> UserRoles { get; set; }

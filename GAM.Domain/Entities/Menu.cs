@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,9 +7,9 @@ namespace GAM.Domain.Entities
     /// <summary>
     /// 功能菜单实体
     /// </summary>
-    public class Menu
+    public class Menu: BaseEntity
     {
-        public int ID { get; set; }
+        //public int ID { get; set; }
         public Guid ParentId { get; set; }
         public int SerialNumber { get; set; }
         public string Name { get; set; }
@@ -18,7 +17,7 @@ namespace GAM.Domain.Entities
         public string Url { get; set; }
         public int Type { get; set; }
         public string Icon { get; set; }
-        public string Remarks { get; set; }
+        //public string Remarks { get; set; }
         
         //导航属性
         public virtual RoleMenu RoleMenu { get; set; } = new RoleMenu();
