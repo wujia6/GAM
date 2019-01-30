@@ -1,6 +1,6 @@
-﻿using GAM.Application.IService;
-using GAM.Domain.Entities;
+﻿using GAM.Domain.Entities;
 using GAM.Domain.IComm;
+using GAM.Application.IService;
 
 namespace GAM.Application.Service
 {

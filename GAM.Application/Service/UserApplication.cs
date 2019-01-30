@@ -7,11 +7,11 @@ namespace GAM.Application.Service
 {
     public class UserApplication : IUserApplication
     {
-        //ÁìÓò·þÎñ¶ÔÏó
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         private readonly IDomainService<User> iService;
-        //¹¤×÷µ¥Ôª¶ÔÏó
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½
         private readonly IUnitOfWork iUnitWork;
-        //¹¹Ôìº¯Êý
+        //ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½
         public UserApplication(EFCoreContext context, IDomainService<User> ids)
         {
             this.iService = ids;
@@ -19,11 +19,11 @@ namespace GAM.Application.Service
         }
 
         /// <summary>
-        /// µÇÂ¼Ð£Ñé
+        /// ï¿½ï¿½Â¼Ð£ï¿½ï¿½
         /// </summary>
-        /// <param name="account">µÇÂ¼ÕËºÅ</param>
-        /// <param name="password">µÇÂ¼ÃÜÂë</param>
-        /// <param name="inputcode">ÑéÖ¤Âë</param>
+        /// <param name="account">ï¿½ï¿½Â¼ï¿½Ëºï¿½</param>
+        /// <param name="password">ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="inputcode">ï¿½ï¿½Ö¤ï¿½ï¿½</param>
         /// <returns>User</returns>
         public User UserLogin(string account, string password, string inputcode)
         {
@@ -33,9 +33,9 @@ namespace GAM.Application.Service
         }
 
         /// <summary>
-        /// ×¢²áÐ£Ñé
+        /// ×¢ï¿½ï¿½Ð£ï¿½ï¿½
         /// </summary>
-        /// <param name="entity">ÊµÌå¶ÔÏó</param>
+        /// <param name="entity">Êµï¿½ï¿½ï¿½ï¿½ï¿½</param>
         /// <returns>bool</returns>
         public bool UserRegister(User entity)
         {

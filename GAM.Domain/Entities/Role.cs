@@ -22,13 +22,13 @@ namespace GAM.Domain.Entities
     //RoleConfig
     public class RoleConfig : IEntityTypeConfiguration<Role>
     {
-        public void Configure(EntityTypeBuilder<Role> b)
+        public void Configure(EntityTypeBuilder<Role> builder)
         {
-            b.HasKey(e=>e.ID);
-            b.Property(e=>e.Code).IsRequired().HasMaxLength(50);
-            b.Property(e=>e.Name).IsRequired().HasMaxLength(20);
-            b.Property(e=>e.CreateTime).HasColumnType("DateTime").HasDefaultValue(DateTime.Now);
-            b.Property(e=>e.Remarks).HasMaxLength(100);
+            builder.HasKey(e=>e.ID);
+            builder.Property(e=>e.Code).IsRequired().HasMaxLength(50);
+            builder.Property(e=>e.Name).IsRequired().HasMaxLength(20);
+            builder.Property(e=>e.CreateTime).HasColumnType("DateTime").HasDefaultValue(DateTime.Now);
+            builder.Property(e=>e.Remarks).HasMaxLength(100);
         }
     }
 }

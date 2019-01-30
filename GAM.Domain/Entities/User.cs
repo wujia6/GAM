@@ -23,20 +23,20 @@ namespace GAM.Domain.Entities
 
     public class UserConfig : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<User> b)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
-            b.HasKey(e=>e.ID);
-            b.Property(e=>e.Account).IsRequired().HasMaxLength(30);
-            b.Property(e=>e.Password).IsRequired().HasMaxLength(30);
-            b.Property(e=>e.Name).IsRequired().HasMaxLength(10);
-            b.Property(e=>e.EMail).IsRequired().HasMaxLength(80);
-            b.Property(e=>e.MobileNumber).IsRequired().HasMaxLength(11);
-            b.Property(e=>e.Remarks).HasMaxLength(100);
-            b.Property(e=>e.CreateTime).HasDefaultValue(DateTime.Now);
-            b.Property(e=>e.LastLoginTime).IsRequired().HasColumnType("DateTime");
-            b.Property(e=>e.IsDeleted).HasDefaultValue(false);
+            builder.HasKey(e=>e.ID);
+            builder.Property(e=>e.Account).IsRequired().HasMaxLength(30);
+            builder.Property(e=>e.Password).IsRequired().HasMaxLength(30);
+            builder.Property(e=>e.Name).IsRequired().HasMaxLength(10);
+            builder.Property(e=>e.EMail).IsRequired().HasMaxLength(80);
+            builder.Property(e=>e.MobileNumber).IsRequired().HasMaxLength(11);
+            builder.Property(e=>e.Remarks).HasMaxLength(100);
+            builder.Property(e=>e.CreateTime).HasDefaultValue(DateTime.Now);
+            builder.Property(e=>e.LastLoginTime).IsRequired().HasColumnType("DateTime");
+            builder.Property(e=>e.IsDeleted).HasDefaultValue(false);
             //一对多关系设置
-            b.HasOne(e => e.Department).WithMany().HasForeignKey(e => e.Department.ID);
+            builder.HasOne(e => e.Department).WithMany().HasForeignKey(e => e.Department.ID);
         }
     }
 }
