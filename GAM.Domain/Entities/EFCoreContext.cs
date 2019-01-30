@@ -8,15 +8,15 @@ namespace GAM.Domain.Entities
     public class EFCoreContext: DbContext, IUnitOfWork
     {
         //方式1
-        //public EFCoreContext(DbContextOptions<EFCoreContext> options) : base(options) { }
+        public EFCoreContext(DbContextOptions<EFCoreContext> options) : base(options) { }
 
         //方式2
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-            optionsBuilder.UseSqlServer(builder.GetConnectionString("SqlConn"));
-            base.OnConfiguring(optionsBuilder);
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+        //    optionsBuilder.UseSqlServer(builder.GetConnectionString("SqlConn"));
+        //    base.OnConfiguring(optionsBuilder);
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
