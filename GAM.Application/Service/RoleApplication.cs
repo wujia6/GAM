@@ -1,15 +1,16 @@
 ﻿using GAM.Application.IService;
+using GAM.Domain.Entities;
 using GAM.Domain.IComm;
 
 namespace GAM.Application.Service
 {
     public class RoleApplication: IRoleApplication
     {
-        private readonly IRoleService iRoleService;
+        private readonly IDomainService<Role> iService;
 
-        public RoleApplication(IRoleService service)
+        public RoleApplication(IDomainService<Role> ids)
         {
-            this.iRoleService = service;
+            this.iService = ids;
         }
 
         
