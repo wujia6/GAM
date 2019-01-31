@@ -6,8 +6,8 @@ namespace GAM.Domain.MainContext.Entities.Aggregates.RoleAgg
 {
     public class RoleMenu: BaseEntity
     {
-        public int RoleID { get; set; }
-        public int MenuID { get; set; }
+        // public int RoleID { get; set; }
+        // public int MenuID { get; set; }
 
         public virtual Role Role { get; set; } = RoleFactory.Instance.Create();
         public virtual Menu Menu { get; set; } = MenuFactory.Instance.Create();
@@ -17,9 +17,9 @@ namespace GAM.Domain.MainContext.Entities.Aggregates.RoleAgg
     {
         public void Configure(EntityTypeBuilder<RoleMenu> builder)
         {
-            builder.HasKey(e => e.ID);
-            builder.HasOne(a => a.Role).WithMany(b => b.RoleMenus).HasForeignKey(a => a.RoleID).IsRequired();
-            builder.HasOne(a => a.Menu).WithOne(b => b.RoleMenu).HasForeignKey<RoleMenu>(a => a.MenuID).IsRequired();
+            builder.HasKey(a => a.ID);
+            builder.HasOne(a => a.Role).WithMany(b => b.Menus).HasForeignKey(a => a.Role.ID).IsRequired();
+            builder.HasOne(a => a.Menu).WithMany(b => b.Roles).HasForeignKey(a => a.Menu.ID).IsRequired();
             builder.Property(a => a.Remarks).HasMaxLength(100);
         }
     }

@@ -9,7 +9,7 @@ namespace GAM.Domain.MainContext.Entities.Aggregates.MenuAgg
         {
             b.HasKey(e => e.ID);
             b.Property(e => e.PID).IsRequired();
-            b.Property(e => e.SerialNumber).IsRequired();
+            b.Property(e => e.SerialNo).IsRequired();
             b.Property(e => e.Name).IsRequired().HasMaxLength(30);
             b.Property(e => e.Code).IsRequired().HasMaxLength(30);
             b.Property(e => e.Url).IsRequired().HasMaxLength(50);

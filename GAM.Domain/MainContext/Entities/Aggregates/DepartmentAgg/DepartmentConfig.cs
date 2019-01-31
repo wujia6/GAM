@@ -12,7 +12,7 @@ namespace GAM.Domain.MainContext.Entities.Aggregates.DepartmentAgg
             b.Property(e => e.Name).IsRequired().HasMaxLength(30);
             b.Property(e => e.Code).IsRequired().HasMaxLength(20);
             b.Property(e => e.Manager).IsRequired().HasMaxLength(30);
-            b.Property(e => e.ContactNumber).IsRequired().HasMaxLength(11);
+            b.Property(e => e.PhoneNumber).IsRequired().HasMaxLength(11);
             b.Property(e => e.Remarks).HasMaxLength(100);
             b.Property(e => e.CreateTime).HasDefaultValue(DateTime.Now);
             b.Property(e => e.IsDeleted).HasDefaultValue(false);

@@ -11,6 +11,6 @@ namespace GAM.Domain.MainContext.Entities.Aggregates.RoleAgg
         public DateTime? CreateTime { get; set; }
         //导航属性
         public virtual IQueryable<UserRole> Users { get; set; }
-        public virtual IQueryable<RoleMenu> RoleMenus { get; set; }
+        public virtual IQueryable<RoleMenu> Menus { get; set; }
     }
 }
