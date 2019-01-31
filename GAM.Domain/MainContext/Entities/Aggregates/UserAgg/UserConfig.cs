@@ -19,7 +19,7 @@ namespace GAM.Domain.MainContext.Entities.Aggregates.UserAgg
             builder.Property(e => e.LastLoginTime).IsRequired().HasColumnType("DateTime");
             builder.Property(e => e.IsDeleted).HasDefaultValue(false);
             //一对多关系设置
-            builder.HasOne(e => e.Department).WithMany().HasForeignKey(e => e.Department.ID);
+            builder.HasOne(e => e.Department).WithMany(e=>e.Users).HasForeignKey(e => e.Department.ID);
         }
     }
 }

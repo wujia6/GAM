@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using GAM.Domain.MainContext.Entities.Aggregates.UserAgg;
 
 namespace GAM.Domain.MainContext.Entities.Aggregates.DepartmentAgg
 {
@@ -12,6 +14,6 @@ namespace GAM.Domain.MainContext.Entities.Aggregates.DepartmentAgg
         public DateTime? CreateTime { get; set; }
         public bool IsDeleted { get; set; }
         //导航属性
-        //public virtual IQueryable<User> Users { get; set; }
+        public virtual IQueryable<User> Users { get; set; }
     }
 }
