@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using GAM.Domain.Entities;
-using GAM.Domain.IComm;
+using GAM.Domain.Entities.Aggregates;
+using GAM.Domain.Repository;
 
 namespace GAM.Domain.Service
 {
-    internal class DomainService<T>: IDomainService<T> where T: BaseEntity, IAggregareRoot
+    internal class DomainService<T>: IDomainService<T> where T: class, IAggregateRoot
     {
         private readonly IRepository<T> iRepos;
 
