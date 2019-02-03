@@ -3,7 +3,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using GAM.Domain.Entities;
-using System.Threading.Tasks;
 using GAM.Domain.Entities.Aggregates;
 
 namespace GAM.Domain.Repository
@@ -12,6 +11,7 @@ namespace GAM.Domain.Repository
     {
         //数据上下文
         private readonly GamDbContext objContext;
+
         //构造函数
         public EFCoreRepository(GamDbContext context)
         {
@@ -20,8 +20,9 @@ namespace GAM.Domain.Repository
 
         //表映射
         private DbSet<T> TSet => objContext.Set<T>();
+
         //获取IQueryable<T>集合对象
-        public IQueryable<T> DbEntity => TSet.AsQueryable();
+        //public IQueryable<T> DbEntity => TSet.AsQueryable();
 
         #region ##同步
         public bool Delete(T entity)
@@ -86,40 +87,40 @@ namespace GAM.Domain.Repository
         #endregion
 
         #region ##异步
-        public Task<bool> InsertAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<bool> InsertAsync(T entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<bool> DeleteAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<bool> DeleteAsync(T entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<bool> UpdateAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<bool> UpdateAsync(T entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<T> FindAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<T> FindAsync(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<T> FindAsync(Expression<Func<T, bool>> filter, Expression<Func<T, object>> include = null)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<T> FindAsync(Expression<Func<T, bool>> filter, Expression<Func<T, object>> include = null)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<IQueryable<T>> QueryAsync(Expression<Func<T, object>> include = null, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<IQueryable<T>> QueryAsync(Expression<Func<T, object>> include = null, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<IQueryable<T>> QueryAsync(int index, int size, out int total, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<IQueryable<T>> QueryAsync(int index, int size, out int total, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null)
+        //{
+        //    throw new NotImplementedException();
+        //}
         #endregion
     }
 }

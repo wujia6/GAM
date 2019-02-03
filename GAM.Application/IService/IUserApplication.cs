@@ -1,4 +1,4 @@
-using GAM.Domain.Entities;
+using GAM.Domain.Entities.Aggregates.UserAgg;
 
 namespace GAM.Application.IService
 {

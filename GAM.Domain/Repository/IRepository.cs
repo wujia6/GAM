@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using GAM.Domain.Entities.Aggregates;
 
 namespace GAM.Domain.Repository
 {
     public interface IRepository<T> where T: class, IAggregateRoot
     {
-        IQueryable<T> DbEntity { get; }
+        //IQueryable<T> DbEntity { get; }
 
         #region ##同步
         bool Insert(T entity);
@@ -35,26 +34,26 @@ namespace GAM.Domain.Repository
         #endregion
 
         #region ##异步
-        Task<bool> InsertAsync(T entity);
+        //Task<bool> InsertAsync(T entity);
 
-        Task<bool> DeleteAsync(T entity);
+        //Task<bool> DeleteAsync(T entity);
 
-        Task<bool> UpdateAsync(T entity);
+        //Task<bool> UpdateAsync(T entity);
 
-        Task<T> FindAsync(int id);
+        //Task<T> FindAsync(int id);
 
-        Task<T> FindAsync(Expression<Func<T, bool>> filter, Expression<Func<T, object>> include = null);
+        //Task<T> FindAsync(Expression<Func<T, bool>> filter, Expression<Func<T, object>> include = null);
 
-        Task<IQueryable<T>> QueryAsync(
-            Expression<Func<T, object>> include = null,
-            Expression<Func<T, bool>> filter = null,
-            Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null);
+        //Task<IQueryable<T>> QueryAsync(
+        //    Expression<Func<T, object>> include = null,
+        //    Expression<Func<T, bool>> filter = null,
+        //    Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null);
 
-        Task<IQueryable<T>> QueryAsync(int index,
-            int size,
-            out int total,
-            Expression<Func<T, bool>> filter = null,
-            Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null);
+        //Task<IQueryable<T>> QueryAsync(int index,
+        //    int size,
+        //    out int total,
+        //    Expression<Func<T, bool>> filter = null,
+        //    Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null);
         #endregion
     }
 }

@@ -9,7 +9,7 @@ namespace GAM.Domain.Entities
         //public GamDbContext(DbContextOptions<GamDbContext> options) : base(options) { }
 
         #region ##表映射
-        public DbSet<Aggregates.DepartmentAgg.Department> Departments { get; set; }
+        public DbSet<Aggregates.DepartAgg.Depart> Departs { get; set; }
         public DbSet<Aggregates.RoleAgg.Role> Roles { get; set; }
         public DbSet<Aggregates.MenuAgg.Menu> Menus { get; set; }
         public DbSet<Aggregates.UserAgg.User> Users { get; set; }

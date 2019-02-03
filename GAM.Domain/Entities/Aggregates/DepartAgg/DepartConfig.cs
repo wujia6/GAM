@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace GAM.Domain.Entities.Aggregates.DepartmentAgg
+namespace GAM.Domain.Entities.Aggregates.DepartAgg
 {
-    public class DepartmentConfig : IEntityTypeConfiguration<Department>
+    public class DepartConfig : IEntityTypeConfiguration<Depart>
     {
-        public void Configure(EntityTypeBuilder<Department> b)
+        public void Configure(EntityTypeBuilder<Depart> b)
         {
             b.HasKey(e => e.ID);
             b.Property(e => e.Name).IsRequired().HasMaxLength(30);

@@ -2,9 +2,9 @@
 using System.Linq;
 using GAM.Domain.Entities.Aggregates.UserAgg;
 
-namespace GAM.Domain.Entities.Aggregates.DepartmentAgg
+namespace GAM.Domain.Entities.Aggregates.DepartAgg
 {
-    public class Department : IAggregateRoot
+    public class Depart : IAggregateRoot
     {
         public int ID { get; set; }
         public int PID { get; set; }

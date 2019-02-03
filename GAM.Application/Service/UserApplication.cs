@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using GAM.Application.IService;
 using GAM.Domain.Entities;
-using GAM.Domain.IComm;
+using GAM.Domain.Entities.Aggregates.UserAgg;
+using GAM.Domain.Service;
 
 namespace GAM.Application.Service
 {
@@ -12,7 +13,7 @@ namespace GAM.Application.Service
         //������Ԫ����
         private readonly IUnitOfWork iUnitWork;
         //���캯��
-        public UserApplication(EFCoreContext context, IDomainService<User> ids)
+        public UserApplication(GamDbContext context, IDomainService<User> ids)
         {
             this.iService = ids;
             this.iUnitWork = context as IUnitOfWork;
@@ -29,7 +30,7 @@ namespace GAM.Application.Service
         {
             return iService.Single(
                 filter: u => u.Account == account && u.Password == password,
-                include: u => u.UserRoles.Include(r => r.Role.RoleMenus.Include(x => x.Menu)));
+                include: u => u.Roles.Include(r => r.Role.Menus.Include(x => x.Menu)));
         }
 
         /// <summary>

@@ -1,5 +1,5 @@
-﻿using GAM.Domain.Entities;
-using GAM.Domain.IComm;
+﻿using GAM.Domain.Entities.Aggregates.RoleAgg;
+using GAM.Domain.Service;
 using GAM.Application.IService;
 
 namespace GAM.Application.Service
