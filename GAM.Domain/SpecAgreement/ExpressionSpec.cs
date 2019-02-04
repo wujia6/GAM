@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using GAM.Domain.Entities;
 
-namespace GAM.Domain.ComponentSpec
+namespace GAM.Domain.SpecAgreement
 {
     /// <summary>
     /// 表达式树类

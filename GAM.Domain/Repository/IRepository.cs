@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using GAM.Domain.Entities.Aggregates;
+using GAM.Domain.Entities;
 
 namespace GAM.Domain.Repository
 {
-    public interface IRepository<T> where T: class, IAggregateRoot
+    public interface IRepository<T> where T : class, IEntity
     {
+        #region ##同步
         //IQueryable<T> DbEntity { get; }
 
-        #region ##同步
         bool Insert(T entity);
 
         bool Delete(T entity);

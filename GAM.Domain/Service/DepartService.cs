@@ -6,7 +6,7 @@ using GAM.Domain.Repository;
 
 namespace GAM.Domain.Service
 {
-    public class DepartService: IDepartService
+    public class DepartService: EFCoreRepository<Depart>, IDepartService
     {
         private readonly IRepository<Depart> iRepos;
 
