@@ -32,28 +32,5 @@ namespace GAM.Domain.Repository
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null);
         #endregion
-
-        #region ##异步
-        //Task<bool> InsertAsync(T entity);
-
-        //Task<bool> DeleteAsync(T entity);
-
-        //Task<bool> UpdateAsync(T entity);
-
-        //Task<T> FindAsync(int id);
-
-        //Task<T> FindAsync(Expression<Func<T, bool>> filter, Expression<Func<T, object>> include = null);
-
-        //Task<IQueryable<T>> QueryAsync(
-        //    Expression<Func<T, object>> include = null,
-        //    Expression<Func<T, bool>> filter = null,
-        //    Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null);
-
-        //Task<IQueryable<T>> QueryAsync(int index,
-        //    int size,
-        //    out int total,
-        //    Expression<Func<T, bool>> filter = null,
-        //    Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null);
-        #endregion
     }
 }
