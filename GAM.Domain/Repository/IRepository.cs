@@ -2,12 +2,13 @@
 using System.Linq;
 using System.Linq.Expressions;
 using GAM.Domain.Entities;
+using GAM.Domain.SpecAgreement;
 
 namespace GAM.Domain.Repository
 {
     public interface IRepository<T> where T : class, IEntity
     {
-        #region ##同步
+        #region ##成员方法
         //IQueryable<T> DbEntity { get; }
 
         bool Insert(T entity);
@@ -20,6 +21,8 @@ namespace GAM.Domain.Repository
 
         T Find(Expression<Func<T, bool>> filter, Expression<Func<T, object>> include = null);
 
+        T Find(ISpecification<T> spec);
+
         IQueryable<T> Query(
             Expression<Func<T, object>> include = null,
             Expression<Func<T, bool>> filter = null,
@@ -31,6 +34,8 @@ namespace GAM.Domain.Repository
             out int total,
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null);
+
+        IQueryable<T> Query(ISpecification<T> spec);
         #endregion
     }
 }

@@ -28,7 +28,23 @@ namespace GAM.Domain.SpecAgreement
 
         public static ISpecification<T> Eval(Expression<Func<T, bool>> expression)
         {
-            return new ExpressionSpec<T>(expression);
+            return new ExpressSpec<T>(expression);
+        }
+    }
+
+    //引入规约表达式
+    internal class SpecExpression<T> : Specification<T> where T : class, IEntity
+    {
+        private readonly Expression<Func<T, bool>> express;
+
+        public SpecExpression(Expression<Func<T, bool>> expression)
+        {
+            this.express = expression;
+        }
+
+        public override Expression<Func<T, bool>> Expression
+        {
+            get { return this.express; }
         }
     }
 }
