@@ -4,10 +4,11 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using GAM.Domain.Entities;
 using GAM.Domain.SpecAgreement;
+using GAM.Domain.Entities.Aggregates;
 
 namespace GAM.Domain.Repository
 {
-    public class EFCoreRepository<T> : IRepository<T> where T: class, IEntity
+    public class EFCoreRepository<T> : IRepository<T> where T: class, IAggregateRoot
     {
         #region ##EFCoreRepository成员
         //构造函数

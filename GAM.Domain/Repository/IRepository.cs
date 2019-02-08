@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using GAM.Domain.Entities;
+using GAM.Domain.Entities.Aggregates;
 using GAM.Domain.SpecAgreement;
 
 namespace GAM.Domain.Repository
 {
-    public interface IRepository<T> where T : class, IEntity
+    public interface IRepository<T> where T : class, IAggregateRoot
     {
         #region ##成员方法
         //IQueryable<T> DbEntity { get; }

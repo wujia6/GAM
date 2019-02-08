@@ -2,84 +2,86 @@
 using System.Linq;
 using System.Linq.Expressions;
 using GAM.Domain.Entities;
+using GAM.Domain.Entities.Aggregates;
 using GAM.Domain.SpecAgreement;
 using Microsoft.EntityFrameworkCore;
 
 namespace GAM.Domain.Repository
 {
-    public abstract class AbstractRepository<T> : IRepository<T> where T : class, IEntity
+    public abstract class AbstractRepository<T> : IRepository<T> where T : class, IAggregateRoot
     {
+        //数据上下文
+        protected readonly GamDbContext DataContext;
+        //构造函数
         public AbstractRepository(GamDbContext context)
         {
-            ObjContext = context;
+            DataContext = context;
         }
-        //数据上下文
-        private GamDbContext ObjContext { get; }
         //表映射
-        private DbSet<T> TSet => ObjContext.Set<T>();
+        public DbSet<T> Maps => DataContext.Set<T>();
 
-        public bool Delete(T entity)
+        #region ##实现接口
+        public virtual bool Delete(T entity)
         {
-            ObjContext.Entry<T>(entity).State = EntityState.Deleted;
+            DataContext.Entry<T>(entity).State = EntityState.Deleted;
             return true;
         }
 
-        public bool Update(T entity)
+        public virtual bool Update(T entity)
         {
-            ObjContext.Attach(entity);
-            ObjContext.Entry(entity).State = EntityState.Modified;
+            DataContext.Attach(entity);
+            DataContext.Entry(entity).State = EntityState.Modified;
             return true;
         }
 
-        public bool Insert(T entity)
+        public virtual bool Insert(T entity)
         {
-            ObjContext.Entry(entity).State = EntityState.Added;
+            DataContext.Entry(entity).State = EntityState.Added;
             return true;
         }
 
-        public T Find(int id)
+        public virtual T Find(int id)
         {
-            return TSet.Find(id);
+            return Maps.Find(id);
         }
 
-        public T Find(ISpecification<T> spec)
+        public virtual T Find(ISpecification<T> spec)
         {
-            return TSet.FirstOrDefault(spec.Expression);
+            return Maps.FirstOrDefault(spec.Expression);
         }
 
-        public T Find(Expression<Func<T, bool>> filter, Expression<Func<T, object>> include = null)
+        public virtual T Find(Expression<Func<T, bool>> filter, Expression<Func<T, object>> include = null)
         {
             if (include != null)
-                TSet.Include(include);
-            return TSet.FirstOrDefault(filter);
+                Maps.Include(include);
+            return Maps.FirstOrDefault(filter);
         }
 
-        public IQueryable<T> Query(ISpecification<T> spec)
+        public virtual IQueryable<T> Query(ISpecification<T> spec)
         {
-            return TSet.Where(spec.Expression);
+            return Maps.Where(spec.Expression);
         }
 
-        public IQueryable<T> Query(Expression<Func<T, object>> include = null, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null)
+        public virtual IQueryable<T> Query(Expression<Func<T, object>> include = null, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null)
         {
             if (include != null)
-                TSet.Include(include);
+                Maps.Include(include);
 
             if (filter != null)
-                TSet.Where(filter);
+                Maps.Where(filter);
 
-            orderby?.Invoke(TSet);
-            return TSet.AsQueryable();
+            orderby?.Invoke(Maps);
+            return Maps.AsQueryable();
         }
 
-        public IQueryable<T> Query(int index, int size, out int total, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null)
+        public virtual IQueryable<T> Query(int index, int size, out int total, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null)
         {
             if (filter != null)
-                TSet.Where(filter);
-            orderby?.Invoke(TSet);
-            total = TSet.Count();
-            return TSet.Skip((index - 1) * size).Take(size).AsQueryable();
+                Maps.Where(filter);
+            orderby?.Invoke(Maps);
+            total = Maps.Count();
+            return Maps.Skip((index - 1) * size).Take(size).AsQueryable();
         }
-
-        
+        #endregion
     }
 }

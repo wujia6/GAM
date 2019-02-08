@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using GAM.Domain.Entities;
+﻿using GAM.Domain.Entities;
 using GAM.Domain.Entities.Aggregates.DepartAgg;
 using GAM.Domain.Repository;
 using GAM.Domain.SpecAgreement;
