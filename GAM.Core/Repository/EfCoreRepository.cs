@@ -3,49 +3,47 @@ using GAM.Core.Models;
 using GAM.Core.IApi;
 using Microsoft.EntityFrameworkCore;
 
-namespace GAM.Infrastructure.Repository
+namespace GAM.Core.Repository
 {
     public class EfCoreRepository<T>: IEfCoreRepository<T> where T: BaseEntity, IAggregateRoot
     {
-        //数据上下文接口
-        protected readonly IModelContext iContext;
-
         //构造函数
         public EfCoreRepository(IModelContext icxt)
         {
-            iContext = icxt;
+            IContext = icxt;
         }
-
-        //表映射
-        public IQueryable<T> Model => iContext.Set<T>().AsQueryable();
 
         #region ##实现接口
-        public bool Add(T model)
+        public IModelContext IContext { get; }
+
+        public IQueryable<T> ModelSet => IContext.Set<T>().AsQueryable();
+
+        public bool InsertAt(T model)
         {
-            iContext.Entry(model).State = EntityState.Added;
+            IContext.Entry(model).State = EntityState.Added;
             return true;
         }
 
-        public bool Remove(T model)
+        public bool DeleteAt(T model)
         {
-            iContext.Entry(model).State = EntityState.Deleted;
+            IContext.Entry(model).State = EntityState.Deleted;
             return true;
         }
 
-        public bool Edit(T model)
+        public bool UpdateAt(T model)
         {
-            iContext.Entry(model).State = EntityState.Modified;
+            IContext.Entry(model).State = EntityState.Modified;
             return true;
         }
 
         public T FindBySpecification(ISpecification<T> ispec)
         {
-            return Model.FirstOrDefault(ispec.Expression);
+            return ModelSet.FirstOrDefault(ispec.Expression);
         }
 
         public IQueryable<T> QueryBySpecification(ISpecification<T> ispec)
         {
-            return Model.Where(ispec.Expression);
+            return ModelSet.Where(ispec.Expression);
         }
         #endregion
     }

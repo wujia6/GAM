@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using GAM.Core.IApi;
 using GAM.Core.Models;
 
-namespace GAM.Infrastructure.Repository
+namespace GAM.Core.Repository
 {
     public abstract class Specification<T>: ISpecification<T> where T : BaseEntity
     {

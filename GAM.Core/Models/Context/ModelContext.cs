@@ -11,12 +11,12 @@ namespace GAM.Core.Models.Context
         public ModelContext(DbContextOptions<ModelContext> options): base(options) { }
 
         //方式2：重写父类OnConfiguring函数读取指定的配置文件
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    var config = new ConfigurationBuilder().SetBasePath(System.IO.Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-        //    optionsBuilder.UseSqlServer(config.GetConnectionString("GamDbConnection"));
-        //    base.OnConfiguring(optionsBuilder);
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var config = new ConfigurationBuilder().SetBasePath(System.IO.Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            optionsBuilder.UseSqlServer(config.GetConnectionString("GamDbConnection"));
+            base.OnConfiguring(optionsBuilder);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

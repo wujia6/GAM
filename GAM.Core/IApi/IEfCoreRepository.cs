@@ -5,11 +5,15 @@ namespace GAM.Core.IApi
 {
     public interface IEfCoreRepository<T> where T: BaseEntity, IAggregateRoot
     {
-        bool Add(T model);
+        IModelContext IContext { get; }
 
-        bool Remove(T model);
+        IQueryable<T> ModelSet { get; }
 
-        bool Edit(T model);
+        bool InsertAt(T model);
+
+        bool DeleteAt(T model);
+
+        bool UpdateAt(T model);
 
         T FindBySpecification(ISpecification<T> ispec);
 

@@ -1,9 +1,10 @@
-﻿namespace GAM.Core.IApi.IManage
+﻿using System.Linq;
+using GAM.Core.Models.UserRoot;
+
+namespace GAM.Core.IApi.IManage
 {
     public interface IDepartManage
     {
-        //Depart FindByID(int dpeartId);
-
-        //bool SaveDepartUsers();
+        IQueryable<User> GetDepartUsers(int departId);
     }
 }

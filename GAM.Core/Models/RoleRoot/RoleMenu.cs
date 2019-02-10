@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GAM.Core.Models.MenuRoot;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GAM.Core.Models.RoleRoot
@@ -6,8 +7,8 @@ namespace GAM.Core.Models.RoleRoot
     public class RoleMenu: BaseEntity
     {
         //导航属性
-        public virtual Role Role { get; set; } = new Role();
-        public virtual Menu Menu { get; set; } = new Menu();
+        public virtual Role Role { get; set; } = RootFactory<Role>.ClassInstance(typeof(Role));
+        public virtual Menu Menu { get; set; } = RootFactory<Menu>.ClassInstance(typeof(Menu));
     }
 
     public class RoleMenuConfig : IEntityTypeConfiguration<RoleMenu>

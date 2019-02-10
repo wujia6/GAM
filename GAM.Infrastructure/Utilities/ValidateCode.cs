@@ -4,7 +4,7 @@ using System.DrawingCore.Drawing2D;
 using System.DrawingCore.Imaging;
 using System.IO;
 
-namespace GAM.Infrastructure.Utilities
+namespace GAM.Core.Utilities
 {
     /// <summary>
     /// 图片验证码类

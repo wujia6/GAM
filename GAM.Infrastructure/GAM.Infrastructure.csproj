@@ -10,8 +10,4 @@
     <PackageReference Include="ZKWeb.System.Drawing" Version="4.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\GAM.Core\GAM.Core.csproj" />
-  </ItemGroup>
-
 </Project>

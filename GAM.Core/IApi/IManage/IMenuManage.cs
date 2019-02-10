@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GAM.Core.Utilities
+namespace GAM.Core.IApi.IManage
 {
-    public class EntityResult<T> where T: class
+    public interface IMenuManage
     {
-
     }
 }

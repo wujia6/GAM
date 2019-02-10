@@ -9,12 +9,12 @@ namespace GAM.Core.Models.UserRoot
         public string Account { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
-        public string EMail { get; set; }
-        public string MobileNumber { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
         public DateTime LastLoginTime { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool IsEnable { get; set; }
 
         public virtual IQueryable<UserRole> Roles { get; set; }
-        public virtual Depart Depart { get; set; }
+        public virtual Depart Depart { get; set; } = RootFactory<Depart>.ClassInstance(typeof(Depart));
     }
 }

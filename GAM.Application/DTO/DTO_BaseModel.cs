@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GAM.Infrastructure.DTO
+﻿namespace GAM.Core.DTO
 {
     abstract class DTO_BaseModel
     {
