@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GAM.Infrastructure\GAM.Infrastructure.csproj" />
+    <ProjectReference Include="..\GAM.Application\GAM.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

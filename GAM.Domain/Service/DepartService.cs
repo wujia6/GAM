@@ -2,10 +2,11 @@
 using GAM.Domain.Entities.Aggregates.DepartAgg;
 using GAM.Domain.Repository;
 using GAM.Domain.SpecAgreement;
+using GAM.Application.IManage;
 
 namespace GAM.Domain.Service
 {
-    public class DepartService: IDepartService
+    public class DepartService: IDepartManage
     {
         private readonly IRepository<Depart> iRepos;
 

@@ -28,7 +28,7 @@ namespace GAM.Domain.SpecAgreement
 
         public static ISpecification<T> Eval(Expression<Func<T, bool>> expression)
         {
-            return new ExpressSpec<T>(expression);
+            return new SpecExpression<T>(expression);
         }
     }
 

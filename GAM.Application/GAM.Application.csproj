@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GAM.Domain\GAM.Domain.csproj" />
-    <ProjectReference Include="..\GAM.Infrastructure\GAM.Infrastructure.csproj" />
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

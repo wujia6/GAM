@@ -1,16 +1,15 @@
-﻿using GAM.Domain.Entities.Aggregates.RoleAgg;
-using GAM.Domain.Service;
-using GAM.Application.IService;
+﻿using GAM.Core.IManage;
+using GAM.Core.IService;
 
-namespace GAM.Application.Service
+namespace GAM.Core.Service
 {
-    public class RoleApplication: IRoleApplication
+    public class RoleApplication: IRoleApp
     {
-        private readonly IDomainService<Role> iService;
+        private readonly IRoleManage iService;
 
-        public RoleApplication(IDomainService<Role> ids)
+        public RoleApplication(IRoleManage iser)
         {
-            this.iService = ids;
+            this.iService = iser;
         }
 
         

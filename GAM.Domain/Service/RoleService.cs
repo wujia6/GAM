@@ -5,10 +5,11 @@ using GAM.Domain.Entities.Aggregates.RoleAgg;
 using GAM.Domain.Repository;
 using GAM.Domain.SpecAgreement;
 using Microsoft.EntityFrameworkCore;
+using GAM.Application.IManage;
 
 namespace GAM.Domain.Service
 {
-    public class RoleService: AbstractRepository<Role>, IRoleService
+    public class RoleService: AbstractRepository<Role>, IRoleManage
     {
         public RoleService(GamDbContext cxt) : base(cxt) { }
 

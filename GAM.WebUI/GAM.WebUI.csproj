@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GAM.Application\GAM.Application.csproj" />
-    <ProjectReference Include="..\GAM.Domain\GAM.Domain.csproj" />
     <ProjectReference Include="..\GAM.Infrastructure\GAM.Infrastructure.csproj" />
   </ItemGroup>
 

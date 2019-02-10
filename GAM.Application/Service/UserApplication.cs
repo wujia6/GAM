@@ -1,19 +1,18 @@
-using Microsoft.EntityFrameworkCore;
-using GAM.Application.IService;
+using GAM.Core.IService;
 using GAM.Domain.Entities;
 using GAM.Domain.Entities.Aggregates.UserAgg;
-using GAM.Domain.Service;
+using GAM.Core.IManage;
 
-namespace GAM.Application.Service
+namespace GAM.Core.Service
 {
-    public class UserApplication : IUserApplication
+    public class UserApplication : IUserApp
     {
         //����������
-        private readonly IDomainService<User> iService;
+        private readonly IUserManage iService;
         //������Ԫ����
         private readonly IUnitOfWork iUnitWork;
         //���캯��
-        public UserApplication(GamDbContext context, IDomainService<User> ids)
+        public UserApplication(GamDbContext context, IUserManage ids)
         {
             this.iService = ids;
             this.iUnitWork = context as IUnitOfWork;
@@ -28,9 +27,10 @@ namespace GAM.Application.Service
         /// <returns>User</returns>
         public User UserLogin(string account, string password, string inputcode)
         {
-            return iService.Single(
-                filter: u => u.Account == account && u.Password == password,
-                include: u => u.Roles.Include(r => r.Role.Menus.Include(x => x.Menu)));
+            // return iService.Single(
+            //     filter: u => u.Account == account && u.Password == password,
+            //     include: u => u.Roles.Include(r => r.Role.Menus.Include(x => x.Menu)));
+            return null;
         }
 
         /// <summary>
@@ -40,11 +40,12 @@ namespace GAM.Application.Service
         /// <returns>bool</returns>
         public bool UserRegister(User entity)
         {
-            if (entity == null)
-                return false;
-            if (!iService.Add(entity))
-                return false;
-            return iUnitWork.SaveChanges() > 0;
+            // if (entity == null)
+            //     return false;
+            // if (!iService.Add(entity))
+            //     return false;
+            // return iUnitWork.SaveChanges() > 0;
+            return false;
         }
     }
 }
