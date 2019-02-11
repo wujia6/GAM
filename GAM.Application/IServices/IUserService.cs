@@ -1,6 +1,6 @@
 using GAM.Core.Models.UserRoot;
 
-namespace GAM.Core.IService
+namespace GAM.Application.IService
 {
     public interface IUserService
     {

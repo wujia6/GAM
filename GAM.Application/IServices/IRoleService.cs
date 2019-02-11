@@ -1,4 +1,4 @@
-namespace GAM.Core.IService
+namespace GAM.Application.IService
 {
     public interface IRoleService
     {

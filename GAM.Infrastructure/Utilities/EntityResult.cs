@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GAM.Core.Utilities
+namespace GAM.Infrastructure.Utilities
 {
     public class EntityResult<T> where T: class
     {
