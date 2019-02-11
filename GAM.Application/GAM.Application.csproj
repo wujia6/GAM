@@ -8,4 +8,8 @@
     <PackageReference Include="AutoMapper" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GAM.Core\GAM.Core.csproj" />
+  </ItemGroup>
+
 </Project>

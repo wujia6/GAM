@@ -1,8 +1,8 @@
-using GAM.Domain.Entities.Aggregates.UserAgg;
+using GAM.Core.Models.UserRoot;
 
 namespace GAM.Core.IService
 {
-    public interface IUserApp
+    public interface IUserService
     {
         User UserLogin(string account, string password, string inputcode);
 

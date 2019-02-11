@@ -1,21 +1,17 @@
+using GAM.Core.Models.UserRoot;
+using GAM.Core.IApi.IManage;
 using GAM.Core.IService;
-using GAM.Domain.Entities;
-using GAM.Domain.Entities.Aggregates.UserAgg;
-using GAM.Core.IManage;
 
-namespace GAM.Core.Service
+namespace GAM.Application.AppServices
 {
-    public class UserApplication : IUserApp
+    public class UserService : IUserService
     {
         //����������
         private readonly IUserManage iService;
-        //������Ԫ����
-        private readonly IUnitOfWork iUnitWork;
         //���캯��
-        public UserApplication(GamDbContext context, IUserManage ids)
+        public UserService(IUserManage ids)
         {
             this.iService = ids;
-            this.iUnitWork = context as IUnitOfWork;
         }
 
         /// <summary>
