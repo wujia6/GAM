@@ -4,18 +4,16 @@ using GAM.Core.IApi;
 using GAM.Core.IApi.IManage;
 using GAM.Core.Models.RoleRoot;
 using GAM.Core.Repository;
+using System;
+using System.Linq.Expressions;
 
-namespace GAM.Core.Manage
+namespace GAM.Core.Services
 {
-    public class RoleService: IRoleManage
+    internal class RoleService: CoreService<Role>, IRoleManage
     {
-        private readonly IEfCoreRepository<Role> iRepo;
+        public RoleService(IEfCoreRepository<Role> irepo): base(irepo) { }
 
-        public RoleService(IEfCoreRepository<Role> irepo)
-        {
-            this.iRepo = irepo;
-        }
-
+        #region ##实现接口方法
         /// <summary>
         /// 清空角色菜单
         /// </summary>
@@ -23,9 +21,9 @@ namespace GAM.Core.Manage
         public void ClearRoleMenus(int roleId)
         {
             ISpecification<RoleMenu> ispec = Specification<RoleMenu>.Eval(e => e.Role.ID == roleId);
-            var range = iRepo.IContext.Set<RoleMenu>().Where(ispec.Expression);
+            var range = IRepository.IContext.Set<RoleMenu>().Where(ispec.Expression);
             if (range.Count() > 0)
-                iRepo.IContext.Set<RoleMenu>().RemoveRange(range);
+                IRepository.IContext.Set<RoleMenu>().RemoveRange(range);
         }
 
         /// <summary>
@@ -36,7 +34,7 @@ namespace GAM.Core.Manage
         public IQueryable<RoleMenu> GetRoleMenus(int roleId)
         {
             ISpecification<RoleMenu> ispec = Specification<RoleMenu>.Eval(e => e.Role.ID == roleId);
-            return iRepo.IContext.Set<RoleMenu>().Where(ispec.Expression).AsQueryable();
+            return IRepository.IContext.Set<RoleMenu>().Where(ispec.Expression).AsQueryable();
         }
 
         /// <summary>
@@ -48,8 +46,9 @@ namespace GAM.Core.Manage
         public bool SetMenusToRole(int roleId, List<RoleMenu> roleMenus)
         {
             ClearRoleMenus(roleId);
-            iRepo.IContext.Set<RoleMenu>().AddRange(roleMenus);
+            IRepository.IContext.Set<RoleMenu>().AddRange(roleMenus);
             return true;
         }
+        #endregion
     }
 }

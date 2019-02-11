@@ -5,16 +5,8 @@ using GAM.Core.Models.UserRoot;
 
 namespace GAM.Core.IApi.IManage
 {
-    public interface IUserManage
+    public interface IUserManage: ICoreManage<User>
     {
-        bool AddOrEdit(User user);
-
-        bool Remove(int userId);
-
-        User FindBy(Expression<Func<User, bool>> express);
-
-        IQueryable<User> QueryBy(Expression<Func<User, bool>> express);
-
         IQueryable<UserRole> GetRolesByUser(Expression<Func<UserRole, bool>> express);
     }
 }

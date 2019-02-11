@@ -4,13 +4,11 @@ using GAM.Core.Models.RoleRoot;
 
 namespace GAM.Core.IApi.IManage
 {
-    public interface IRoleManage
+    public interface IRoleManage: ICoreManage<Role>
     {
         IQueryable<RoleMenu> GetRoleMenus(int roleId);
 
         bool SetMenusToRole(int roleId, List<RoleMenu> roleMenus);
-
-        //bool RoleMenuRemoveAt(RoleMenu roleMenu);
 
         void ClearRoleMenus(int roleId);
     }

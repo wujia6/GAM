@@ -1,18 +1,14 @@
-﻿using GAM.Core.IApi;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
+using GAM.Core.IApi;
 using GAM.Core.IApi.IManage;
 using GAM.Core.Models.MenuRoot;
 
 namespace GAM.Core.Services
 {
-    public class MenuService: IMenuManage
+    internal class MenuService: CoreService<Menu>, IMenuManage
     {
-        private readonly IEfCoreRepository<Menu> iRepo;
-
-        public MenuService(IEfCoreRepository<Menu> irepo)
-        {
-            this.iRepo = irepo;
-        }
-
-
+        public MenuService(IEfCoreRepository<Menu> irepo): base(irepo) { }
     }
 }
