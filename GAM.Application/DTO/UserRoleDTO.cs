@@ -2,12 +2,12 @@
 
 namespace GAM.Application.DTO
 {
-    public class DTO_Depart: DTO_BaseEntity
+    public class UserRoleDTO
     {
         [DataMember]
-        public string Name { get; set; }
+        public UserDTO UserDto { get; set; }
 
         [DataMember]
-        public string Manager { get; set; }
+        public RoleDTO RoleDto { get; set; }
     }
 }

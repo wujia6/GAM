@@ -6,8 +6,10 @@ namespace GAM.Core.Models.UserRoot
 {
     public class UserRole: BaseEntity
     {
-        public virtual User User { get; set; } = RootFactory<User>.ClassInstance(typeof(User));
+        //public int UserID { get; set; }
+        //public int RoleID { get; set; }
 
+        public virtual User User { get; set; } = RootFactory<User>.ClassInstance(typeof(User));
         public virtual Role Role { get; set; } = RootFactory<Role>.ClassInstance(typeof(Role));
     }
 
