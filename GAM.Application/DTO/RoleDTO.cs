@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace GAM.Application.DTO
@@ -12,9 +12,9 @@ namespace GAM.Application.DTO
         public string Code { get; set; }
 
         [DataMember]
-        public IQueryable<UserRoleDTO> UserDtos { get; set; }
+        public ICollection<UserRoleDTO> UserDtos { get; set; }
 
         [DataMember]
-        public IQueryable<RoleMenuDTO> RoleMenuDtos { get; set; }
+        public ICollection<RoleMenuDTO> RoleMenuDtos { get; set; }
     }
 }

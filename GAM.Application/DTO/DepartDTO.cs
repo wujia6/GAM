@@ -12,6 +12,6 @@ namespace GAM.Application.DTO
         public string Manager { get; set; }
 
         [DataMember]
-        public IList<UserDTO> UserDtos { get; set; }
+        public ICollection<UserDTO> UserDtos { get; set; }
     }
 }

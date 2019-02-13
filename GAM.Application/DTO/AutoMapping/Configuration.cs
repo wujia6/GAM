@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoMapper;
-using GAM.Core.Models.UserRoot;
-using System.IO;
-using Microsoft.AspNetCore.Http;
+using GAM.Core.Models;
 
 namespace GAM.Application.DTO.AutoMapping
 {
-    public class Configuration
+    public static class Configuration
     {
         public static void Configure()
         {
@@ -18,11 +13,12 @@ namespace GAM.Application.DTO.AutoMapping
             {
                 cfg.AddProfile(new SourceProfile());
             });
-
-
-            IEnumerable<UserDTO> dtoUsers = new List<UserDTO>();
-            Mapper.Initialize(cfg => cfg.CreateMap<UserDTO, User>());
-            Mapper.Map<IEnumerable<UserDTO>, IQueryable<User>>(dtoUsers);
+        }
+        
+        public static IQueryable<M> ConvertDomainModels<D, M>(ICollection<D> dtos) where D: BaseDTO where M: BaseEntity
+        {
+            Mapper.Initialize(cfg => cfg.CreateMap<D, M>());
+            return Mapper.Map<ICollection<D>, IQueryable<M>>(dtos);
         }
     }
 }
