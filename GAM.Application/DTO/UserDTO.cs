@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 
@@ -28,7 +29,7 @@ namespace GAM.Application.DTO
         public bool IsEnable { get; set; }
 
         [DataMember]
-        public IQueryable<UserRoleDTO> UserRolesDto { get; set; }
+        public IEnumerable<UserRoleDTO> UserRolesDto { get; set; }
 
         [DataMember]
         public DepartDTO DepartDto { get; set; }

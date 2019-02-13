@@ -12,11 +12,17 @@ namespace GAM.Application.DTO.AutoMapping
         public SourceProfile()
         {
             CreateMap<BaseDTO, BaseEntity>();
+            
             CreateMap<DepartDTO, Depart>();
+
             CreateMap<RoleDTO, Role>();
+
             CreateMap<UserDTO, User>();
+
             CreateMap<MenuDTO, Menu>();
+
             CreateMap<RoleMenuDTO, RoleMenu>();
+
             CreateMap<UserRoleDTO, UserRole>();
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace GAM.Application.DTO
 {
@@ -9,5 +10,8 @@ namespace GAM.Application.DTO
 
         [DataMember]
         public string Manager { get; set; }
+
+        [DataMember]
+        public IList<UserDTO> UserDtos { get; set; }
     }
 }
