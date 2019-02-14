@@ -5,12 +5,12 @@ namespace GAM.Core.Models.DepartRoot
 {
     public class DepartConfig : IEntityTypeConfiguration<Depart>
     {
-        public void Configure(EntityTypeBuilder<Depart> b)
+        public void Configure(EntityTypeBuilder<Depart> builder)
         {
-            b.HasKey(e => e.ID);
-            b.Property(e => e.Name).IsRequired().HasMaxLength(30);
-            b.Property(e => e.Manager).IsRequired().HasMaxLength(30);
-            b.Property(e => e.Remarks).HasMaxLength(100);
+            builder.HasKey(e => e.ID);
+            builder.Property(e => e.Name).IsRequired().HasMaxLength(30);
+            builder.Property(e => e.Manager).IsRequired().HasMaxLength(30);
+            builder.Property(e => e.Remarks).HasMaxLength(100);
         }
     }
 }

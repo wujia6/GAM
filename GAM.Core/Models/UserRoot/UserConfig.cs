@@ -17,7 +17,7 @@ namespace GAM.Core.Models.UserRoot
             builder.Property(e => e.LastLoginTime).IsRequired();
             builder.Property(e => e.IsEnable).HasDefaultValue(false);
             //一对多关系
-            builder.HasOne(e => e.Depart).WithMany(e => e.Users).HasForeignKey(e => e.Depart.ID);
+            builder.HasOne(e => e.Depart).WithMany(e => e.Users);
         }
     }
 }

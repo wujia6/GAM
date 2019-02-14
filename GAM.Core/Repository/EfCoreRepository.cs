@@ -8,13 +8,13 @@ namespace GAM.Core.Repository
     public class EfCoreRepository<T>: IEfCoreRepository<T> where T: BaseEntity, IAggregateRoot
     {
         //构造函数
-        public EfCoreRepository(IModelContext icxt)
+        public EfCoreRepository(ISqlLocalContext icxt)
         {
             IContext = icxt;
         }
 
         #region ##实现接口
-        public IModelContext IContext { get; }
+        public ISqlLocalContext IContext { get; }
 
         public IQueryable<T> ModelSet => IContext.Set<T>().AsQueryable();
 

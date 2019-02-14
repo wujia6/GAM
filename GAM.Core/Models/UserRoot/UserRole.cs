@@ -18,8 +18,8 @@ namespace GAM.Core.Models.UserRoot
         public void Configure(EntityTypeBuilder<UserRole> builder)
         {
             builder.HasKey(e => e.ID);
-            builder.HasOne(e => e.User).WithMany(e => e.Roles).HasForeignKey(e => e.User.ID).IsRequired();
-            builder.HasOne(e => e.Role).WithMany(e => e.Users).HasForeignKey(e => e.Role.ID).IsRequired();
+            builder.HasOne(e => e.User).WithMany(e => e.Roles);
+            builder.HasOne(e => e.Role).WithMany(e => e.Users);
             builder.Property(e => e.Remarks).HasMaxLength(100);
         }
     }

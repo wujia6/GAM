@@ -1,4 +1,5 @@
-﻿using GAM.Core.Models.RoleRoot;
+﻿using System.Linq;
+using GAM.Core.Models.RoleRoot;
 
 namespace GAM.Core.Models.MenuRoot
 {
@@ -17,6 +18,6 @@ namespace GAM.Core.Models.MenuRoot
         public string Code { get; set; }
         public string Url { get; set; }
         //导航属性
-        public virtual RoleMenu RoleMenu { get; set; }
+        public virtual IQueryable<RoleMenu> RoleMenus { get; set; }
     }
 }

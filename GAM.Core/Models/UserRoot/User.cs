@@ -15,6 +15,6 @@ namespace GAM.Core.Models.UserRoot
         public bool IsEnable { get; set; }
 
         public virtual IQueryable<UserRole> Roles { get; set; }
-        public virtual Depart Depart { get; set; } = RootFactory<Depart>.ClassInstance(typeof(Depart));
+        public virtual Depart Depart { get; set; }
     }
 }

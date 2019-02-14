@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace GAM.Core.IApi
 {
-    public interface IModelContext: IUnitOfWork
+    public interface ISqlLocalContext: IUnitOfWork
     {
         DbSet<T> Set<T>() where T : class;
 

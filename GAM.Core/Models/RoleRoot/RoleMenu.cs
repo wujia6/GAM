@@ -19,8 +19,8 @@ namespace GAM.Core.Models.RoleRoot
         public void Configure(EntityTypeBuilder<RoleMenu> builder)
         {
             builder.HasKey(a => a.ID);
-            builder.HasOne(a => a.Role).WithMany(b => b.RoleMenus).HasForeignKey(a => a.Role.ID).IsRequired();
-            builder.HasOne(a => a.Menu).WithOne(b => b.RoleMenu).HasForeignKey<Menu>(a=>a.ID).IsRequired();
+            builder.HasOne(a => a.Role).WithMany(b => b.RoleMenus);
+            builder.HasOne(a => a.Menu).WithMany(b => b.RoleMenus);
             builder.Property(a => a.Remarks).HasMaxLength(100);
         }
     }

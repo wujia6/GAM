@@ -5,7 +5,7 @@ namespace GAM.Core.IApi
 {
     public interface IEfCoreRepository<T> where T: BaseEntity, IAggregateRoot
     {
-        IModelContext IContext { get; }
+        ISqlLocalContext IContext { get; }
 
         IQueryable<T> ModelSet { get; }
 
