@@ -28,7 +28,7 @@ namespace GAM.Application.DTO
         public bool IsEnable { get; set; }
 
         [DataMember]
-        public ICollection<UserRoleDTO> UserRolesDto { get; set; }
+        public ICollection<UserRoleDTO> UserRoleDtos { get; set; }
 
         [DataMember]
         public DepartDTO DepartDto { get; set; }

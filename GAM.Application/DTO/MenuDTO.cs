@@ -28,6 +28,6 @@ namespace GAM.Application.DTO
 
         //导航属性
         [DataMember]
-        public RoleMenuDTO RoleMenu { get; set; }
+        public RoleMenuDTO RoleMenus { get; set; }
     }
 }

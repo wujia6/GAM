@@ -15,10 +15,10 @@ namespace GAM.Application.DTO.AutoMapping
             });
         }
         
-        public static IQueryable<M> ConvertDomainModels<D, M>(ICollection<D> dtos) where D: BaseDTO where M: BaseEntity
-        {
-            Mapper.Initialize(cfg => cfg.CreateMap<D, M>());
-            return Mapper.Map<ICollection<D>, IQueryable<M>>(dtos);
-        }
+        //public static IQueryable<TDest> ConvertDomainModels<TSource, TDest>(ICollection<TSource> dtos) where TSource: BaseDTO where TDest: BaseEntity
+        //{
+        //    Mapper.Initialize(cfg => cfg.CreateMap<TSource, TDest>());
+        //    return Mapper.Map<ICollection<TSource>, IQueryable<TDest>>(dtos);
+        //}
     }
 }

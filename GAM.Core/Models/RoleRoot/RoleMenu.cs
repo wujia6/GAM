@@ -6,12 +6,9 @@ namespace GAM.Core.Models.RoleRoot
 {
     public class RoleMenu: BaseEntity
     {
-        //public int RoleID { get; set; }
-        //public int MenuID { get; set; }
-
         //导航属性
-        public virtual Role Role { get; set; } = RootFactory<Role>.ClassInstance(typeof(Role));
-        public virtual Menu Menu { get; set; } = RootFactory<Menu>.ClassInstance(typeof(Menu));
+        public virtual Role Role { get; set; } = RoleFactory.ClassInstance();
+        public virtual Menu Menu { get; set; } = MenuFactory.ClassInstance();
     }
 
     public class RoleMenuConfig : IEntityTypeConfiguration<RoleMenu>

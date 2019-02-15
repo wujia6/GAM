@@ -5,7 +5,7 @@ using GAM.Core.Models;
 
 namespace GAM.Core.Repository
 {
-    public abstract class Specification<T>: ISpecification<T> where T : BaseEntity
+    public abstract class Specification<T>: ISpecification<T> where T : class
     {
         public abstract Expression<Func<T, bool>> Expression { get; }
 
