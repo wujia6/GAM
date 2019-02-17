@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using AutoMapper;
 using GAM.Application.DTO;
 using GAM.Application.IServices;
@@ -32,14 +29,16 @@ namespace GAM.Application.Services
             return iManage.RemoveAt(entity);
         }
 
-        public DepartDTO FindBy(ISpecification<DepartDTO> ispec)
+        public DepartDTO FindBy(ISpecification<Depart> ispec)
         {
-            Mapper.Initialize(cfg=>cfg.CreateMap<Depart, DepartDTO>())
+            var entity = iManage.FindBy(ispec.Expression);
+            return Mapper.Map<DepartDTO>(entity);
         }
 
-        public IQueryable<DepartDTO> QueryBy(ISpecification<DepartDTO> ispec)
+        public IQueryable<DepartDTO> QueryBy(ISpecification<Depart> ispec)
         {
-            throw new NotImplementedException();
+            IQueryable<Depart> iqs = iManage.QueryBy(ispec.Expression);
+            return Mapper.Map<IQueryable<DepartDTO>>(iqs);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
 using GAM.Core.IApi;
-using GAM.Core.Models;
 
 namespace GAM.Core.Repository
 {
@@ -21,7 +20,7 @@ namespace GAM.Core.Repository
     }
 
     //引入规约表达式
-    internal class SpecExpression<T> : Specification<T> where T : BaseEntity
+    internal class SpecExpression<T> : Specification<T> where T : class
     {
         private readonly Expression<Func<T, bool>> express;
 

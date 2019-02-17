@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using GAM.Application.DTO;
+using GAM.Core.Models.DepartRoot;
 
 namespace GAM.Application.IServices
 {
@@ -9,8 +10,8 @@ namespace GAM.Application.IServices
 
         bool RemoveAt(DepartDTO model);
 
-        DepartDTO FindBy(Core.IApi.ISpecification<DepartDTO> ispec);
+        DepartDTO FindBy(Core.IApi.ISpecification<Depart> ispec);
 
-        IQueryable<DepartDTO> QueryBy(Core.IApi.ISpecification<DepartDTO> ispec);
+        IQueryable<DepartDTO> QueryBy(Core.IApi.ISpecification<Depart> ispec);
     }
 }
