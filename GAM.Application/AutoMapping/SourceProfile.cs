@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
-using GAM.Core.Models;
+using GAM.Application.DepartApp;
+using GAM.Application.MenuApp;
+using GAM.Application.RoleApp;
+using GAM.Application.UserApp;
 using GAM.Core.Models.DepartRoot;
 using GAM.Core.Models.MenuRoot;
 using GAM.Core.Models.RoleRoot;
@@ -14,53 +17,51 @@ namespace GAM.Application.DTO.AutoMapping
     {
         public SourceProfile()
         {
-            CreateMap<BaseDTO, BaseEntity>();
-
-            CreateMap<BaseEntity, BaseDTO>();
-
             CreateMap<DepartDTO, Depart>()
+                .ForMember(dest => dest.ID, opts => opts.MapFrom(src => src.ID))
+                .ForMember(dest => dest.Remarks, opts => opts.MapFrom(src => src.Remarks))
                 .ForMember(dest => dest.Users, opts => opts.MapFrom(src => src.UserDtos));
 
-            CreateMap<Depart, DepartDTO>()
-                .ForMember(dest => dest.UserDtos, opts => opts.MapFrom(src => src.Users));
+            CreateMap<Depart, DepartDTO>();
 
             CreateMap<RoleDTO, Role>()
+                .ForMember(dest => dest.ID, opts => opts.MapFrom(src => src.ID))
+                .ForMember(dest => dest.Remarks, opts => opts.MapFrom(src => src.Remarks))
                 .ForMember(dest => dest.RoleMenus, opts => opts.MapFrom(src => src.RoleMenuDtos))
                 .ForMember(dest => dest.Users, opts => opts.MapFrom(src => src.UserDtos));
 
-            CreateMap<Role, RoleDTO>()
-                .ForMember(dest => dest.RoleMenuDtos, opts => opts.MapFrom(src => src.RoleMenus))
-                .ForMember(dest => dest.UserDtos, opts => opts.MapFrom(src => src.Users));
+            CreateMap<Role, RoleDTO>();
 
             CreateMap<UserDTO, User>()
+                .ForMember(dest => dest.ID, opts => opts.MapFrom(src => src.ID))
+                .ForMember(dest => dest.Remarks, opts => opts.MapFrom(src => src.Remarks))
                 .ForMember(dest => dest.Depart, opts => opts.MapFrom(src => src.DepartDto))
                 .ForMember(dest => dest.Roles, opts => opts.MapFrom(src => src.UserRoleDtos));
 
-            CreateMap<User, UserDTO>()
-                .ForMember(dest => dest.DepartDto, opts => opts.MapFrom(src => src.Depart))
-                .ForMember(dest => dest.UserRoleDtos, opts => opts.MapFrom(src => src.Roles));
+            CreateMap<User, UserDTO>();
 
             CreateMap<MenuDTO, Menu>()
+                .ForMember(dest => dest.ID, opts => opts.MapFrom(src => src.ID))
+                .ForMember(dest => dest.Remarks, opts => opts.MapFrom(src => src.Remarks))
                 .ForMember(dest => dest.RoleMenus, opts => opts.MapFrom(src => src.RoleMenuDtos));
 
-            CreateMap<Menu, MenuDTO>()
-                .ForMember(dest => dest.RoleMenuDtos, opts => opts.MapFrom(src => src.RoleMenus));
+            CreateMap<Menu, MenuDTO>();
 
             CreateMap<RoleMenuDTO, RoleMenu>()
+                .ForMember(dest => dest.ID, opts => opts.MapFrom(src => src.ID))
+                .ForMember(dest => dest.Remarks, opts => opts.MapFrom(src => src.Remarks))
                 .ForMember(dest => dest.Role, opts => opts.MapFrom(src => src.RoleDto))
                 .ForMember(dest => dest.Menu, opts => opts.MapFrom(src => src.MenuDto));
 
-            CreateMap<RoleMenu, RoleMenuDTO>()
-                .ForMember(dest => dest.RoleDto, opts => opts.MapFrom(src => src.Role))
-                .ForMember(dest => dest.MenuDto, opts => opts.MapFrom(src => src.Menu));
+            CreateMap<RoleMenu, RoleMenuDTO>();
 
             CreateMap<UserRoleDTO, UserRole>()
+                .ForMember(dest => dest.ID, opts => opts.MapFrom(src => src.ID))
+                .ForMember(dest => dest.Remarks, opts => opts.MapFrom(src => src.Remarks))
                 .ForMember(dest => dest.User, opts => opts.MapFrom(src => src.UserDto))
                 .ForMember(dest => dest.Role, opts => opts.MapFrom(src => src.RoleDto));
 
-            CreateMap<UserRole, UserRoleDTO>()
-                .ForMember(dest => dest.UserDto, opts => opts.MapFrom(src => src.User))
-                .ForMember(dest => dest.RoleDto, opts => opts.MapFrom(src => src.Role));
+            CreateMap<UserRole, UserRoleDTO>();
         }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using GAM.Core.Models.Context;
+using AutoMapper;
 
 namespace GAM.WebUI
 {
@@ -25,6 +26,9 @@ namespace GAM.WebUI
                 options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddMvc();
+            services.AddAutoMapper();
             services.AddDbContext<SqlLocalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConn")));
             //services.AddScoped(typeof(IRepository<T>),typeof(EFCore<T>))
         }
