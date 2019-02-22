@@ -17,7 +17,7 @@ namespace GAM.Application.RoleApp
 
         public bool AddOrEditAt(RoleDTO model)
         {
-            var role = AutoMapper.Mapper.Map<Role>(model);
+            var role = global::AutoMapper.Mapper.Map<Role>(model);
             return iManage.AddOrEditAt(role);
         }
 
@@ -29,13 +29,13 @@ namespace GAM.Application.RoleApp
         public RoleDTO FindBy(ISpecification<Role> ispec)
         {
             var role = iManage.FindBy(ispec);
-            return AutoMapper.Mapper.Map<RoleDTO>(role);
+            return global::AutoMapper.Mapper.Map<RoleDTO>(role);
         }
 
         public IQueryable<RoleDTO> QueryBy(ISpecification<Role> ispec)
         {
             var querys = iManage.QueryBy(ispec);
-            return AutoMapper.Mapper.Map<IQueryable<RoleDTO>>(querys);
+            return global::AutoMapper.Mapper.Map<IQueryable<RoleDTO>>(querys);
         }
 
         public void ClearRoleMenus(ISpecification<RoleMenu> ispec)
@@ -45,7 +45,7 @@ namespace GAM.Application.RoleApp
 
         public bool SetMenusToRole(ISpecification<RoleMenu> ispec, List<RoleMenuDTO> roleMenus)
         {
-            var menus = AutoMapper.Mapper.Map<List<RoleMenu>>(roleMenus);
+            var menus = global::AutoMapper.Mapper.Map<List<RoleMenu>>(roleMenus);
             return iManage.SetMenusToRole(ispec, menus);
         }
     }

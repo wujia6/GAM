@@ -1,25 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Collections;
+using System.Collections.Generic;
 using AutoMapper;
-using AutoMapper.Attributes;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections;
 
-namespace GAM.Infrastructure.Utilities
+namespace GAM.Application.AutoMapperExtend
 {
-    /// <summary>
-    /// AutoMapper帮助类
-    /// </summary>
-    public static class AutoMapperHelper
+    public static class Configs
     {
-        static AutoMapperHelper()
+        public static void Initialize()
         {
-            Assembly.GetExecutingAssembly().GetTypes().Where(p => p.BaseType.Equals(typeof(Controller))).ToList()
-                .ForEach(p =>
-                {
-                    Mapper.Initialize(c => p.Assembly.MapTypes(c));
-                });
+            Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile(new AppProfile());
+            });
         }
 
         /// <summary>
