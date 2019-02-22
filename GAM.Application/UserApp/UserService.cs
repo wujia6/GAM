@@ -1,46 +1,32 @@
+using GAM.Core.IApi;
 using GAM.Core.Models.UserRoot;
 using GAM.Core.Models.UserRoot.Manage;
+using AutoMapper;
 
 namespace GAM.Application.UserApp
 {
     public class UserService : IUserService
     {
-        //����������
-        private readonly IUserManage iService;
-        //���캯��
-        public UserService(IUserManage ids)
+        //领域服务接口对象
+        private readonly IUserManage iUserManage;
+        //构造函数（容器注入）
+        public UserService(IUserManage iManage)
         {
-            this.iService = ids;
+            this.iUserManage = iManage;
         }
 
-        /// <summary>
-        /// ��¼У��
-        /// </summary>
-        /// <param name="account">��¼�˺�</param>
-        /// <param name="password">��¼����</param>
-        /// <param name="inputcode">��֤��</param>
-        /// <returns>User</returns>
-        public User UserLogin(string account, string password, string inputcode)
+        #region ##接口实现
+        public UserDTO UserLogin(ISpecification<User> ispec)
         {
-            // return iService.Single(
-            //     filter: u => u.Account == account && u.Password == password,
-            //     include: u => u.Roles.Include(r => r.Role.Menus.Include(x => x.Menu)));
-            return null;
+            var user = iUserManage.FindBy(ispec);
+            return user == null ? null : Mapper.Map<UserDTO>(user);
         }
 
-        /// <summary>
-        /// ע��У��
-        /// </summary>
-        /// <param name="entity">ʵ�����</param>
-        /// <returns>bool</returns>
-        public bool UserRegister(User entity)
+        public bool UserRegister(UserDTO model)
         {
-            // if (entity == null)
-            //     return false;
-            // if (!iService.Add(entity))
-            //     return false;
-            // return iUnitWork.SaveChanges() > 0;
-            return false;
+            var user = Mapper.Map<User>(model);
+            return iUserManage.AddOrEditAt(user);
         }
+        #endregion
     }
 }

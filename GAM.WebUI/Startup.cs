@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using GAM.Application.AutoMapperExtend;
+using GAM.Application.SourceMapper;
 using GAM.Core.Models.Context;
 using AutoMapper;
 
@@ -15,7 +15,7 @@ namespace GAM.WebUI
         public Startup(IConfiguration config)
         {
             Configuration = config;
-            Configs.Initialize();   //初始化DTO映射关系
+            Mapping.Initialize();   //初始化映射关系
         }
 
         public IConfiguration Configuration { get; }

@@ -8,14 +8,14 @@ using GAM.Core.Models.MenuRoot;
 using GAM.Core.Models.RoleRoot;
 using GAM.Core.Models.UserRoot;
 
-namespace GAM.Application.AutoMapperExtend
+namespace GAM.Application.SourceMapper
 {
     /// <summary>
-    /// AutoMapper映射配置
+    /// 映射规则配置
     /// </summary>
-    public class AppProfile : Profile
+    public class Rules : Profile
     {
-        public AppProfile()
+        public Rules()
         {
             CreateMap<DepartDTO, Depart>()
                 .ForMember(dest => dest.ID, opts => opts.MapFrom(src => src.ID))
