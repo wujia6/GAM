@@ -20,20 +20,15 @@ namespace GAM.WebUI
 
         public IConfiguration Configuration { get; }
 
+        //服务配置
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                //  options.CheckConsentNeeded = context => false;实现session,默认是true
-                options.CheckConsentNeeded = context => false;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
-            services.AddSession();
-            services.AddMvc();
-            services.AddAutoMapper();
             services.AddDbContext<SqlLocalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConn")));
             //services.AddScoped(typeof(IRepository<T>),typeof(EFCore<T>))
+
+            services.AddMvc();
+            services.AddSession();
+            services.AddAutoMapper();
         }
 
         //请求管道配置
