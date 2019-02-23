@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using GAM.Core.IApi;
 
-namespace GAM.Core.Models.MenuRoot.Manage
+namespace GAM.Core.Models.MenuRoot
 {
     public interface IMenuManage
     {

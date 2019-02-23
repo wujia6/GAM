@@ -2,7 +2,7 @@
 using System.Linq;
 using GAM.Core.IApi;
 
-namespace GAM.Core.Models.RoleRoot.Manage
+namespace GAM.Core.Models.RoleRoot
 {
     public interface IRoleManage
     {

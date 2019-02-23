@@ -2,9 +2,9 @@
 using System.Linq;
 using GAM.Core.IApi;
 
-namespace GAM.Core.Models.RoleRoot.Manage
+namespace GAM.Core.Models.RoleRoot
 {
-    internal class RoleManage: IRoleManage
+    public class RoleManage: IRoleManage
     {
         private readonly IRepository<Role> iRepos;
 

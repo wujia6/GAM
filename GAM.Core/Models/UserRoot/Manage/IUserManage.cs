@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using GAM.Core.IApi;
 
-namespace GAM.Core.Models.UserRoot.Manage
+namespace GAM.Core.Models.UserRoot
 {
     public interface IUserManage
     {

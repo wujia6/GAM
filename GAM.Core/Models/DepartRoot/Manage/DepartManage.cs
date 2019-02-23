@@ -2,9 +2,9 @@
 using GAM.Core.IApi;
 using GAM.Core.Models.UserRoot;
 
-namespace GAM.Core.Models.DepartRoot.Manage
+namespace GAM.Core.Models.DepartRoot
 {
-    internal class DepartManage: IDepartManage
+    public class DepartManage: IDepartManage
     {
         private readonly IRepository<Depart> iRepos;
 

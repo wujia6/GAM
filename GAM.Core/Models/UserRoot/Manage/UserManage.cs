@@ -2,9 +2,9 @@
 using System.Linq;
 using GAM.Core.IApi;
 
-namespace GAM.Core.Models.UserRoot.Manage
+namespace GAM.Core.Models.UserRoot
 {
-    internal class UserManage: IUserManage
+    public class UserManage: IUserManage
     {
         private readonly IRepository<User> iRepos;
 

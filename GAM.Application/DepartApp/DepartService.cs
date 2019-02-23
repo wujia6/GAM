@@ -2,7 +2,6 @@
 using AutoMapper;
 using GAM.Core.IApi;
 using GAM.Core.Models.DepartRoot;
-using GAM.Core.Models.DepartRoot.Manage;
 
 namespace GAM.Application.DepartApp
 {

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using GAM.Core.IApi;
 
-namespace GAM.Core.Models.MenuRoot.Manage
+namespace GAM.Core.Models.MenuRoot
 {
-    internal class MenuManage: IMenuManage
+    public class MenuManage: IMenuManage
     {
         private readonly IRepository<Menu> iRepos;
 

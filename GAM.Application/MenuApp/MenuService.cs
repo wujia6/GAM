@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using GAM.Core.IApi;
 using GAM.Core.Models.MenuRoot;
-using GAM.Core.Models.MenuRoot.Manage;
+using GAM.Infrastructure.Utilities;
 
 namespace GAM.Application.MenuApp
 {
-    internal class MenuService : IMenuService
+    public class MenuService : IMenuService
     {
         private readonly IMenuManage iManage;
 
@@ -16,7 +16,7 @@ namespace GAM.Application.MenuApp
 
         public bool AddOrEditAt(MenuDTO model)
         {
-            var menu = global::AutoMapper.Mapper.Map<Menu>(model);
+            var menu = AutoMapperHelper.MapTo<Menu>(model);
             return iManage.AddOrEditAt(menu);
         }
 
@@ -28,13 +28,13 @@ namespace GAM.Application.MenuApp
         public MenuDTO FindBy(ISpecification<Menu> ispec)
         {
             var menu = iManage.FindBy(ispec);
-            return global::AutoMapper.Mapper.Map<MenuDTO>(menu);
+            return AutoMapperHelper.MapTo<MenuDTO>(menu);
         }
 
         public IQueryable<MenuDTO> QueryBy(ISpecification<Menu> ispec)
         {
             var querys = iManage.QueryBy(ispec);
-            return global::AutoMapper.Mapper.Map<IQueryable<MenuDTO>>(querys);
+            return AutoMapperHelper.MapTo<IQueryable<MenuDTO>>(querys);
         }
     }
 }

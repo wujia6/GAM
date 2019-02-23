@@ -8,9 +8,9 @@ namespace GAM.Core.Models.Context
     public class SqlLocalContext: DbContext, ISqlLocalContext
     {
         //方式1：创建数据连接配置
-        public SqlLocalContext(DbContextOptions<SqlLocalContext> options): base(options) { }
-
         //方式2：重写父类OnConfiguring函数读取指定的配置文件
+        public SqlLocalContext(DbContextOptions<SqlLocalContext> options): base(options) { }
+        
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    var config = new ConfigurationBuilder().SetBasePath(System.IO.Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();

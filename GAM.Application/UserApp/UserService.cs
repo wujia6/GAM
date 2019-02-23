@@ -1,7 +1,6 @@
 using GAM.Core.IApi;
 using GAM.Core.Models.UserRoot;
-using GAM.Core.Models.UserRoot.Manage;
-using AutoMapper;
+using GAM.Infrastructure.Utilities;
 
 namespace GAM.Application.UserApp
 {
@@ -9,6 +8,7 @@ namespace GAM.Application.UserApp
     {
         //领域服务接口对象
         private readonly IUserManage iUserManage;
+        
         //构造函数（容器注入）
         public UserService(IUserManage iManage)
         {
@@ -19,12 +19,12 @@ namespace GAM.Application.UserApp
         public UserDTO UserLogin(ISpecification<User> ispec)
         {
             var user = iUserManage.FindBy(ispec);
-            return user == null ? null : Mapper.Map<UserDTO>(user);
+            return user == null ? null : AutoMapperHelper.MapTo<UserDTO>(user);
         }
 
         public bool UserRegister(UserDTO model)
         {
-            var user = Mapper.Map<User>(model);
+            var user = AutoMapperHelper.MapTo<User>(model);
             return iUserManage.AddOrEditAt(user);
         }
         #endregion

@@ -2,7 +2,7 @@
 using GAM.Core.IApi;
 using GAM.Core.Models.UserRoot;
 
-namespace GAM.Core.Models.DepartRoot.Manage
+namespace GAM.Core.Models.DepartRoot
 {
     public interface IDepartManage
     {

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GAM.Repository.EFCore
 {
-    internal class EfCoreRepository<T> : IRepository<T> where T : BaseEntity, IAggregateRoot
+    public class EfCoreRepository<T> : IRepository<T> where T : BaseEntity, IAggregateRoot
     {
         //构造函数
         public EfCoreRepository(ISqlLocalContext icxt)

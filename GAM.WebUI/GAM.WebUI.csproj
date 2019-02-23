@@ -17,6 +17,7 @@
     <ProjectReference Include="..\GAM.Application\GAM.Application.csproj" />
     <ProjectReference Include="..\GAM.Core\GAM.Core.csproj" />
     <ProjectReference Include="..\GAM.Infrastructure\GAM.Infrastructure.csproj" />
+    <ProjectReference Include="..\GAM.Repository\GAM.Repository.csproj" />
   </ItemGroup>
 
 </Project>

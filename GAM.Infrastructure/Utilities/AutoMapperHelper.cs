@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Collections;
+using System.Collections.Generic;
 using AutoMapper;
-using AutoMapper.Attributes;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections;
 
 namespace GAM.Infrastructure.Utilities
 {
@@ -13,59 +9,59 @@ namespace GAM.Infrastructure.Utilities
     /// </summary>
     public static class AutoMapperHelper
     {
-        static AutoMapperHelper()
-        {
-            Assembly.GetExecutingAssembly().GetTypes().Where(p => p.BaseType.Equals(typeof(Controller))).ToList()
-                .ForEach(p =>
-                {
-                    Mapper.Initialize(c => p.Assembly.MapTypes(c));
-                });
-        }
+        // static AutoMapperHelper()
+        // {
+        //     Assembly.GetExecutingAssembly().GetTypes().Where(p => p.BaseType.Equals(typeof(Controller))).ToList()
+        //         .ForEach(p =>
+        //         {
+        //             Mapper.Initialize(c => p.Assembly.MapTypes(c));
+        //         });
+        // }
 
         /// <summary>
         ///  类型映射
         /// </summary>
-        public static T MapTo<T>(this object obj)
+        public static TDest MapTo<TDest>(this object source)
         {
-            if (obj == null) return default(T);
-            Mapper.Initialize(c => c.CreateMap(obj.GetType(), typeof(T)));
-            return Mapper.Map<T>(obj);
-        }
-
-        /// <summary>
-        /// 集合列表类型映射
-        /// </summary>
-        public static List<TDestination> MapToList<TDestination>(this IEnumerable source)
-        {
-            foreach (var first in source)
-            {
-                var type = first.GetType();
-                Mapper.Initialize(c => c.CreateMap(type, typeof(TDestination)));
-                break;
-            }
-            return Mapper.Map<List<TDestination>>(source);
-        }
-
-        /// <summary>
-        /// 集合列表类型映射
-        /// </summary>
-        public static List<TDestination> MapToList<TSource, TDestination>(this IEnumerable<TSource> source)
-        {
-            //IEnumerable<T> 类型需要创建元素的映射
-            Mapper.Initialize(c => c.CreateMap<TSource, TDestination>());
-            return Mapper.Map<List<TDestination>>(source);
+            if (source == null) return default(TDest);
+            Mapper.Initialize(c => c.CreateMap(source.GetType(), typeof(TDest)));
+            return Mapper.Map<TDest>(source);
         }
 
         /// <summary>
         /// 类型映射
         /// </summary>
-        public static TDestination MapTo<TSource, TDestination>(this TSource source, TDestination destination) where TSource : class where TDestination : class
+        public static TDest MapTo<TSource, TDest>(this TSource source, TDest dest)
         {
             if (source == null)
-                return destination;
+                return dest;
 
-            Mapper.Initialize(c => c.CreateMap<TSource, TDestination>());
-            return Mapper.Map(source, destination);
+            Mapper.Initialize(c => c.CreateMap<TSource, TDest>());
+            return Mapper.Map(source, dest);
+        }
+
+        /// <summary>
+        /// 集合列表类型映射
+        /// </summary>
+        public static List<TDest> MapToList<TDest>(this IEnumerable source)
+        {
+            foreach (var first in source)
+            {
+                var type = first.GetType();
+                Mapper.Initialize(c => c.CreateMap(type, typeof(TDest)));
+                break;
+            }
+            return Mapper.Map<List<TDest>>(source);
+        }
+
+        /// <summary>
+        /// 集合列表类型映射
+        /// </summary>
+        public static List<TDest> MapToList<TSource, TDest>(this IEnumerable<TSource> source)
+        {
+            //IEnumerable<T> 类型需要创建元素的映射
+            Mapper.Initialize(c => c.CreateMap<TSource, TDest>());
+            return Mapper.Map<List<TDest>>(source);
         }
     }
 }

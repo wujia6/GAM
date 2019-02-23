@@ -4,9 +4,19 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using AutoMapper;
 using GAM.Application.SourceMapper;
 using GAM.Core.Models.Context;
-using AutoMapper;
+using GAM.Repository.EFCore;
+using GAM.Core.IApi;
+using GAM.Core.Models.DepartRoot;
+using GAM.Core.Models.RoleRoot;
+using GAM.Core.Models.MenuRoot;
+using GAM.Core.Models.UserRoot;
+using GAM.Application.DepartApp;
+using GAM.Application.RoleApp;
+using GAM.Application.MenuApp;
+using GAM.Application.UserApp;
 
 namespace GAM.WebUI
 {
@@ -15,20 +25,40 @@ namespace GAM.WebUI
         public Startup(IConfiguration config)
         {
             Configuration = config;
-            Mapping.Initialize();   //初始化映射关系
+            //Mapping.Initialize();   //初始化映射关系
         }
 
         public IConfiguration Configuration { get; }
 
-        //服务配置
+        //DI容器服务配置
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<SqlLocalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConn")));
-            //services.AddScoped(typeof(IRepository<T>),typeof(EFCore<T>))
-
+            //DI系统服务
             services.AddMvc();
             services.AddSession();
             services.AddAutoMapper();
+
+            //DI数据库连接服务
+            services.AddDbContext<SqlLocalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConn")));
+            services.AddScoped<ISqlLocalContext, SqlLocalContext>();
+
+            //DI领域仓储
+            services.AddScoped<IRepository<Depart>,EfCoreRepository<Depart>>();
+            services.AddScoped<IRepository<Role>,EfCoreRepository<Role>>();
+            services.AddScoped<IRepository<Menu>,EfCoreRepository<Menu>>();
+            services.AddScoped<IRepository<User>,EfCoreRepository<User>>();
+
+            //DI领域服务
+            services.AddScoped<IDepartManage, DepartManage>();
+            services.AddScoped<IRoleManage, RoleManage>();
+            services.AddScoped<IMenuManage, MenuManage>();
+            services.AddScoped<IUserManage, UserManage>();
+
+            //DI应用服务
+            services.AddScoped<IDepartService, DepartService>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IMenuService, MenuService>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         //请求管道配置
