@@ -5,7 +5,7 @@ using GAM.Infrastructure.Dtos;
 
 namespace GAM.Application.IServices
 {
-    public interface IMenuService
+    public interface IMenuService : IDependency
     {
          bool AddOrEditAt(MenuDTO model);
 

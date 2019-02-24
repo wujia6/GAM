@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using GAM.Core.IApi;
+﻿using GAM.Core.IApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -7,16 +6,25 @@ namespace GAM.Core.Models.Context
 {
     public class SqlLocalContext: DbContext, ISqlLocalContext
     {
-        //方式1：创建数据连接配置
-        //方式2：重写父类OnConfiguring函数读取指定的配置文件
+        public SqlLocalContext() { }
+
+        /// <summary>
+        /// 方式1：显示调用父类构造函数
+        /// </summary>
         public SqlLocalContext(DbContextOptions<SqlLocalContext> options): base(options) { }
-        
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    var config = new ConfigurationBuilder().SetBasePath(System.IO.Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-        //    optionsBuilder.UseSqlServer(config.GetConnectionString("SqlConn"));
-        //    base.OnConfiguring(optionsBuilder);
-        //}
+
+        /// <summary>
+        /// 方式2：重写父类OnConfiguring函数读取指定的配置文件
+        /// </summary>
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var config = new ConfigurationBuilder()
+                .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+            optionsBuilder.UseSqlServer(config.GetConnectionString("SqlConn"));
+            base.OnConfiguring(optionsBuilder);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

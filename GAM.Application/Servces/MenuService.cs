@@ -18,7 +18,7 @@ namespace GAM.Application.Services
 
         public bool AddOrEditAt(MenuDTO model)
         {
-            var menu = AutoMapperHelper.MapTo<Menu>(model);
+            var menu = MapperSupport.MapTo<Menu>(model);
             return iManage.AddOrEditAt(menu);
         }
 
@@ -30,13 +30,13 @@ namespace GAM.Application.Services
         public MenuDTO FindBy(ISpecification<Menu> ispec)
         {
             var menu = iManage.FindBy(ispec);
-            return AutoMapperHelper.MapTo<MenuDTO>(menu);
+            return MapperSupport.MapTo<MenuDTO>(menu);
         }
 
         public IQueryable<MenuDTO> QueryBy(ISpecification<Menu> ispec)
         {
             var querys = iManage.QueryBy(ispec);
-            return AutoMapperHelper.MapTo<IQueryable<MenuDTO>>(querys);
+            return MapperSupport.MapTo<IQueryable<MenuDTO>>(querys);
         }
     }
 }

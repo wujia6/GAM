@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using AutoMapper;
-using GAM.Application.SourceMapper;
+using GAM.Application;
 using GAM.Core.Models.Context;
 using GAM.Repository.EFCore;
 using GAM.Core.IApi;
@@ -23,7 +24,7 @@ namespace GAM.WebUI
         public Startup(IConfiguration config)
         {
             Configuration = config;
-            //Mapping.Initialize();   //初始化映射关系
+            //RuleConfigs.Initialize();   //初始化映射器
         }
 
         public IConfiguration Configuration { get; }
@@ -37,7 +38,7 @@ namespace GAM.WebUI
             services.AddAutoMapper();
 
             //DI数据库连接服务
-            services.AddDbContext<SqlLocalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConn")));
+            //services.AddDbContext<SqlLocalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConn")));
             services.AddScoped<ISqlLocalContext, SqlLocalContext>();
 
             //DI领域仓储

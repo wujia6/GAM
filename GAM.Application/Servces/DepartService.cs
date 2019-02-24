@@ -18,26 +18,26 @@ namespace GAM.Application.Services
 
         public bool AddOrEditAt(DepartDTO model)
         {
-            var dpt = AutoMapperHelper.MapTo<Depart>(model);
+            var dpt = MapperSupport.MapTo<Depart>(model);
             return iManage.AddOrEditAt(dpt);
         }
 
         public bool RemoveAt(DepartDTO model)
         {
-            var entity = AutoMapperHelper.MapTo<Depart>(model);
+            var entity = MapperSupport.MapTo<Depart>(model);
             return iManage.RemoveAt(entity);
         }
 
         public DepartDTO FindBy(ISpecification<Depart> ispec)
         {
             var entity = iManage.FindBy(ispec);
-            return AutoMapperHelper.MapTo<DepartDTO>(entity);
+            return MapperSupport.MapTo<DepartDTO>(entity);
         }
 
         public IQueryable<DepartDTO> QueryBy(ISpecification<Depart> ispec)
         {
             IQueryable<Depart> iqs = iManage.QueryBy(ispec);
-            return AutoMapperHelper.MapTo<IQueryable<DepartDTO>>(iqs);
+            return MapperSupport.MapTo<IQueryable<DepartDTO>>(iqs);
         }
     }
 }

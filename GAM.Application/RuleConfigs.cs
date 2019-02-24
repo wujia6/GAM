@@ -5,14 +5,14 @@ using GAM.Core.Models.MenuRoot;
 using GAM.Core.Models.RoleRoot;
 using GAM.Core.Models.UserRoot;
 
-namespace GAM.Application.SourceMapper
+namespace GAM.Application
 {
-    /// <summary>
-    /// 映射规则配置
-    /// </summary>
-    public class Rules : Profile
+    public class RuleConfigs: Profile
     {
-        public Rules()
+        /// <summary>
+        /// 映射规则配置
+        /// </summary>
+        public RuleConfigs()
         {
             CreateMap<DepartDTO, Depart>()
                 .ForMember(dest => dest.ID, opts => opts.MapFrom(src => src.ID))
@@ -59,6 +59,17 @@ namespace GAM.Application.SourceMapper
                 .ForMember(dest => dest.Role, opts => opts.MapFrom(src => src.RoleDto));
 
             CreateMap<UserRole, UserRoleDTO>();
+        }
+
+        /// <summary>
+        /// 初始化映射器
+        /// </summary>
+        public static void Initialize()
+        {
+            Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile(new RuleConfigs());
+            });
         }
     }
 }

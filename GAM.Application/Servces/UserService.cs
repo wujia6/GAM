@@ -21,12 +21,12 @@ namespace GAM.Application.Services
         public UserDTO UserLogin(ISpecification<User> ispec)
         {
             var user = iUserManage.FindBy(ispec);
-            return user == null ? null : AutoMapperHelper.MapTo<UserDTO>(user);
+            return user == null ? null : MapperSupport.MapTo<UserDTO>(user);
         }
 
         public bool UserRegister(UserDTO model)
         {
-            var user = AutoMapperHelper.MapTo<User>(model);
+            var user = MapperSupport.MapTo<User>(model);
             return iUserManage.AddOrEditAt(user);
         }
         #endregion

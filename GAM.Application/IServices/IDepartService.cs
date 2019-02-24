@@ -4,7 +4,7 @@ using GAM.Infrastructure.Dtos;
 
 namespace GAM.Application.IServices
 {
-    public interface IDepartService
+    public interface IDepartService : IDependency
     {
          bool AddOrEditAt(DepartDTO model);
 

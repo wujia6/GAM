@@ -7,7 +7,7 @@ namespace GAM.Infrastructure.Utilities
     /// <summary>
     /// AutoMapper帮助类
     /// </summary>
-    public static class AutoMapperHelper
+    public static class MapperSupport
     {
         // static AutoMapperHelper()
         // {
