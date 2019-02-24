@@ -1,8 +1,10 @@
+using GAM.Application.IServices;
 using GAM.Core.IApi;
 using GAM.Core.Models.UserRoot;
+using GAM.Infrastructure.Dtos;
 using GAM.Infrastructure.Utilities;
 
-namespace GAM.Application.UserApp
+namespace GAM.Application.Services
 {
     public class UserService : IUserService
     {

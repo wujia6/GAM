@@ -13,10 +13,8 @@ using GAM.Core.Models.DepartRoot;
 using GAM.Core.Models.RoleRoot;
 using GAM.Core.Models.MenuRoot;
 using GAM.Core.Models.UserRoot;
-using GAM.Application.DepartApp;
-using GAM.Application.RoleApp;
-using GAM.Application.MenuApp;
-using GAM.Application.UserApp;
+using GAM.Application.IServices;
+using GAM.Application.Services;
 
 namespace GAM.WebUI
 {

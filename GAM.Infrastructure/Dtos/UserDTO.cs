@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using GAM.Application.DepartApp;
 
-namespace GAM.Application.UserApp
+namespace GAM.Infrastructure.Dtos
 {
     public class UserDTO
     {

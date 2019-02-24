@@ -1,7 +1,6 @@
 ﻿using System.Runtime.Serialization;
-using GAM.Application.RoleApp;
 
-namespace GAM.Application.MenuApp
+namespace GAM.Infrastructure.Dtos
 {
     public enum MenuTypeDTO
     {

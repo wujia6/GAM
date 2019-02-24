@@ -1,12 +1,13 @@
-﻿using System.Linq;
+using System.Linq;
 using GAM.Core.IApi;
 using GAM.Core.Models.MenuRoot;
+using GAM.Infrastructure.Dtos;
 
-namespace GAM.Application.MenuApp
+namespace GAM.Application.IServices
 {
     public interface IMenuService
     {
-        bool AddOrEditAt(MenuDTO model);
+         bool AddOrEditAt(MenuDTO model);
 
         bool RemoveAt(ISpecification<Menu> ispec);
 

@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using GAM.Core.IApi;
 using GAM.Core.Models.RoleRoot;
+using GAM.Infrastructure.Dtos;
 
-namespace GAM.Application.RoleApp
+namespace GAM.Application.IServices
 {
     public interface IRoleService
     {
-        #region ##聚合根
+         #region
         bool AddOrEditAt(RoleDTO model);
 
         bool RemoveAt(ISpecification<Role> ispec);
@@ -17,7 +18,7 @@ namespace GAM.Application.RoleApp
         IQueryable<RoleDTO> QueryBy(ISpecification<Role> ispec);
         #endregion
 
-        #region ##角色菜单聚合
+        #region
         void ClearRoleMenus(ISpecification<RoleMenu> ispec);
 
         bool SetMenusToRole(ISpecification<RoleMenu> ispec, List<RoleMenuDTO> roleMenus);

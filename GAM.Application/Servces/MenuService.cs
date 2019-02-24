@@ -1,9 +1,11 @@
-﻿using System.Linq;
+using System.Linq;
+using GAM.Application.IServices;
 using GAM.Core.IApi;
 using GAM.Core.Models.MenuRoot;
+using GAM.Infrastructure.Dtos;
 using GAM.Infrastructure.Utilities;
 
-namespace GAM.Application.MenuApp
+namespace GAM.Application.Services
 {
     public class MenuService : IMenuService
     {

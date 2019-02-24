@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using GAM.Application.UserApp;
+using GAM.Application.IServices;
 using GAM.WebUI.Models;
 
 namespace GAM.WebUI.Controllers 

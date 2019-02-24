@@ -1,11 +1,12 @@
 using GAM.Core.IApi;
 using GAM.Core.Models.UserRoot;
+using GAM.Infrastructure.Dtos;
 
-namespace GAM.Application.UserApp
+namespace GAM.Application.IServices
 {
     public interface IUserService
     {
-        /// <summary>
+         /// <summary>
         /// 登录
         /// </summary>
         /// <param name="ispec">规约接口对象</param>

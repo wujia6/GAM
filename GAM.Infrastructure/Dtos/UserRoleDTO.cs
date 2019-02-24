@@ -1,9 +1,8 @@
 ﻿using System.Runtime.Serialization;
-using GAM.Application.MenuApp;
 
-namespace GAM.Application.RoleApp
+namespace GAM.Infrastructure.Dtos
 {
-    public class RoleMenuDTO
+    public class UserRoleDTO
     {
         [DataMember]
         public int ID { get; set; }
@@ -12,9 +11,9 @@ namespace GAM.Application.RoleApp
         public string Remarks { get; set; }
 
         [DataMember]
-        public RoleDTO RoleDto { get; set; }
+        public UserDTO UserDto { get; set; }
 
         [DataMember]
-        public MenuDTO MenuDto { get; set; }
+        public RoleDTO RoleDto { get; set; }
     }
 }

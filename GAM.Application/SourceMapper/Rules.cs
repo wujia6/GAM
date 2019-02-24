@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
-using GAM.Application.DepartApp;
-using GAM.Application.MenuApp;
-using GAM.Application.RoleApp;
-using GAM.Application.UserApp;
+using GAM.Infrastructure.Dtos;
 using GAM.Core.Models.DepartRoot;
 using GAM.Core.Models.MenuRoot;
 using GAM.Core.Models.RoleRoot;

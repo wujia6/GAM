@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
+using GAM.Application.IServices;
 using GAM.Core.IApi;
 using GAM.Core.Models.RoleRoot;
+using GAM.Infrastructure.Dtos;
 using GAM.Infrastructure.Utilities;
 
-namespace GAM.Application.RoleApp
+namespace GAM.Application.Services
 {
     public class RoleService: IRoleService
     {

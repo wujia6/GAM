@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using GAM.Application.UserApp;
 
-namespace GAM.Application.DepartApp
+namespace GAM.Infrastructure.Dtos
 {
-    public class DepartDTO
+    public class RoleDTO
     {
         [DataMember]
         public int ID { get; set; }
@@ -13,12 +12,15 @@ namespace GAM.Application.DepartApp
         public string Name { get; set; }
 
         [DataMember]
-        public string Manager { get; set; }
+        public string Code { get; set; }
 
         [DataMember]
         public string Remarks { get; set; }
 
         [DataMember]
-        public ICollection<UserDTO> UserDtos { get; set; }
+        public ICollection<UserRoleDTO> UserDtos { get; set; }
+
+        [DataMember]
+        public ICollection<RoleMenuDTO> RoleMenuDtos { get; set; }
     }
 }

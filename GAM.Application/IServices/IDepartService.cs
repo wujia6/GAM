@@ -1,11 +1,12 @@
-﻿using System.Linq;
+using System.Linq;
 using GAM.Core.Models.DepartRoot;
+using GAM.Infrastructure.Dtos;
 
-namespace GAM.Application.DepartApp
+namespace GAM.Application.IServices
 {
     public interface IDepartService
     {
-        bool AddOrEditAt(DepartDTO model);
+         bool AddOrEditAt(DepartDTO model);
 
         bool RemoveAt(DepartDTO model);
 

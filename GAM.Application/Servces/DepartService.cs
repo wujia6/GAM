@@ -1,9 +1,11 @@
-﻿using System.Linq;
-using AutoMapper;
+using System.Linq;
 using GAM.Core.IApi;
 using GAM.Core.Models.DepartRoot;
+using GAM.Infrastructure.Dtos;
+using GAM.Infrastructure.Utilities;
+using GAM.Application.IServices;
 
-namespace GAM.Application.DepartApp
+namespace GAM.Application.Services
 {
     public class DepartService: IDepartService
     {
@@ -16,26 +18,26 @@ namespace GAM.Application.DepartApp
 
         public bool AddOrEditAt(DepartDTO model)
         {
-            var dpt = Mapper.Map<Depart>(model);
+            var dpt = AutoMapperHelper.MapTo<Depart>(model);
             return iManage.AddOrEditAt(dpt);
         }
 
         public bool RemoveAt(DepartDTO model)
         {
-            var entity = Mapper.Map<Depart>(model);
+            var entity = AutoMapperHelper.MapTo<Depart>(model);
             return iManage.RemoveAt(entity);
         }
 
         public DepartDTO FindBy(ISpecification<Depart> ispec)
         {
             var entity = iManage.FindBy(ispec);
-            return Mapper.Map<DepartDTO>(entity);
+            return AutoMapperHelper.MapTo<DepartDTO>(entity);
         }
 
         public IQueryable<DepartDTO> QueryBy(ISpecification<Depart> ispec)
         {
             IQueryable<Depart> iqs = iManage.QueryBy(ispec);
-            return Mapper.Map<IQueryable<DepartDTO>>(iqs);
+            return AutoMapperHelper.MapTo<IQueryable<DepartDTO>>(iqs);
         }
     }
 }
