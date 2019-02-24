@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using GAM.Application;
 using GAM.Core.Models.Context;
@@ -16,48 +18,61 @@ using GAM.Core.Models.MenuRoot;
 using GAM.Core.Models.UserRoot;
 using GAM.Application.IServices;
 using GAM.Application.Services;
+using System.Reflection;
 
 namespace GAM.WebUI
 {
     public class Startup
     {
-        public Startup(IConfiguration config)
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = config;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional:true, reloadOnChange:true)
+                .AddEnvironmentVariables();
+            this.Configuration = builder.Build();
             //RuleConfigs.Initialize();   //初始化映射器
         }
 
-        public IConfiguration Configuration { get; }
+        public IContainer ApplicationContainer { get; private set;}
+
+        public IConfigurationRoot Configuration { get; private set; }
 
         //DI容器服务配置
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             //DI系统服务
             services.AddMvc();
             services.AddSession();
             services.AddAutoMapper();
+            
+            var builder = new ContainerBuilder();
+            builder.RegisterType<SqlLocalContext>().As<ISqlLocalContext>().InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(EfCoreRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t=>t.Name.EndsWith("Manage")).AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t=>t.Name.EndsWith("Service")).AsImplementedInterfaces();
+            builder.Populate(services);
+            this.ApplicationContainer = builder.Build();
+            return new AutofacServiceProvider(ApplicationContainer);
 
             //DI数据库连接服务
             //services.AddDbContext<SqlLocalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConn")));
-            services.AddScoped<ISqlLocalContext, SqlLocalContext>();
-
+            //services.AddScoped<ISqlLocalContext, SqlLocalContext>();
             //DI领域仓储
-            services.AddScoped<IRepository<Depart>,EfCoreRepository<Depart>>();
-            services.AddScoped<IRepository<Role>,EfCoreRepository<Role>>();
-            services.AddScoped<IRepository<Menu>,EfCoreRepository<Menu>>();
-            services.AddScoped<IRepository<User>,EfCoreRepository<User>>();
-
+            // services.AddScoped<IRepository<Depart>,EfCoreRepository<Depart>>();
+            // services.AddScoped<IRepository<Role>,EfCoreRepository<Role>>();
+            // services.AddScoped<IRepository<Menu>,EfCoreRepository<Menu>>();
+            // services.AddScoped<IRepository<User>,EfCoreRepository<User>>();
             //DI领域服务
-            services.AddScoped<IDepartManage, DepartManage>();
-            services.AddScoped<IRoleManage, RoleManage>();
-            services.AddScoped<IMenuManage, MenuManage>();
-            services.AddScoped<IUserManage, UserManage>();
-
+            // services.AddScoped<IDepartManage, DepartManage>();
+            // services.AddScoped<IRoleManage, RoleManage>();
+            // services.AddScoped<IMenuManage, MenuManage>();
+            // services.AddScoped<IUserManage, UserManage>();
             //DI应用服务
-            services.AddScoped<IDepartService, DepartService>();
-            services.AddScoped<IRoleService, RoleService>();
-            services.AddScoped<IMenuService, MenuService>();
-            services.AddScoped<IUserService, UserService>();
+            // services.AddScoped<IDepartService, DepartService>();
+            // services.AddScoped<IRoleService, RoleService>();
+            // services.AddScoped<IMenuService, MenuService>();
+            // services.AddScoped<IUserService, UserService>();
         }
 
         //请求管道配置
