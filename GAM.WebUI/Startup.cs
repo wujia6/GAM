@@ -38,23 +38,15 @@ namespace GAM.WebUI
 
         public IConfigurationRoot Configuration { get; private set; }
 
-        //DI容器服务配置
+        //DI注册容器组件服务
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             //DI系统服务
             services.AddMvc();
             services.AddSession();
             services.AddAutoMapper();
-            
-            var builder = new ContainerBuilder();
-            builder.RegisterType<SqlLocalContext>().As<ISqlLocalContext>().InstancePerLifetimeScope();
-            builder.RegisterGeneric(typeof(EfCoreRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t=>t.Name.EndsWith("Manage")).AsImplementedInterfaces();
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t=>t.Name.EndsWith("Service")).AsImplementedInterfaces();
-            builder.Populate(services);
-            this.ApplicationContainer = builder.Build();
-            return new AutofacServiceProvider(ApplicationContainer);
 
+            #region 手动注册
             //DI数据库连接服务
             //services.AddDbContext<SqlLocalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConn")));
             //services.AddScoped<ISqlLocalContext, SqlLocalContext>();
@@ -73,6 +65,26 @@ namespace GAM.WebUI
             // services.AddScoped<IRoleService, RoleService>();
             // services.AddScoped<IMenuService, MenuService>();
             // services.AddScoped<IUserService, UserService>();
+            #endregion
+
+            /// <summary>
+            /// autofac方式注册
+            /// 步骤说明：
+            ///     新建autofac的ContainerBuilder对象builder
+            ///     注册数据上下文组件服务
+            ///     注册仓储层组件服务
+            ///     注册领域层组件服务
+            ///     注册应用层组件服务
+            ///     将系统服务填充到builder对象
+            /// </summary>
+            var builder = new ContainerBuilder();
+            builder.RegisterType<SqlLocalContext>().As<ISqlLocalContext>().InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(EfCoreRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t=>t.Name.EndsWith("Manage")).AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t=>t.Name.EndsWith("Service")).AsImplementedInterfaces();
+            builder.Populate(services);
+            this.ApplicationContainer = builder.Build();
+            return new AutofacServiceProvider(ApplicationContainer);
         }
 
         //请求管道配置
