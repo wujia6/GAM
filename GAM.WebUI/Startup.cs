@@ -2,28 +2,29 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Autofac;
-using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
+using Autofac.Extensions.DependencyInjection;
 using GAM.Application;
 using GAM.Core.Models.Context;
 using GAM.Repository.EFCore;
 using GAM.Core.IApi;
-using GAM.Core.Models.DepartRoot;
-using GAM.Core.Models.RoleRoot;
-using GAM.Core.Models.MenuRoot;
-using GAM.Core.Models.UserRoot;
-using GAM.Application.IServices;
-using GAM.Application.Services;
-using System.Reflection;
 
 namespace GAM.WebUI
 {
     public class Startup
     {
+        /// <summary>
+        /// 应用程序启动
+        /// 参数：系统变量对象
+        ///     创建ConfigurationByuilder对象
+        ///     指定配置文件路径
+        ///     添加指定配置文件
+        ///     添加为候补系统变量
+        /// </summary>
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -31,7 +32,7 @@ namespace GAM.WebUI
                 .AddJsonFile("appsettings.json", optional:true, reloadOnChange:true)
                 .AddEnvironmentVariables();
             this.Configuration = builder.Build();
-            //RuleConfigs.Initialize();   //初始化映射器
+            RuleConfigs.Initialize();   //初始化映射器
         }
 
         public IContainer ApplicationContainer { get; private set;}
@@ -41,7 +42,7 @@ namespace GAM.WebUI
         //DI注册容器组件服务
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            //DI系统服务
+            //添加系统服务到ServiceCollection的接口对象services
             services.AddMvc();
             services.AddSession();
             services.AddAutoMapper();
@@ -66,17 +67,18 @@ namespace GAM.WebUI
             // services.AddScoped<IMenuService, MenuService>();
             // services.AddScoped<IUserService, UserService>();
             #endregion
-
-            /// <summary>
-            /// autofac方式注册
-            /// 步骤说明：
-            ///     新建autofac的ContainerBuilder对象builder
-            ///     注册数据上下文组件服务
-            ///     注册仓储层组件服务
-            ///     注册领域层组件服务
-            ///     注册应用层组件服务
-            ///     将系统服务填充到builder对象
-            /// </summary>
+ 
+            // autofac方式注册1
+            // 注册方式2：可再program.cs的main()方法内配置WebHostBuilder的地方调用autofac并挂载到startup管道中
+            // 说明：
+            //     新建autofac的ContainerBuilder对象builder
+            //     注册数据上下文组件服务
+            //     注册仓储层组件服务
+            //     注册领域层组件服务
+            //     注册应用层组件服务
+            //     将系统服务填充到builder对象
+            //     builder编译IContainer接口对象并赋值ApplicationContainer属性
+            //     创建IServiceProvider接口对象并返回对象
             var builder = new ContainerBuilder();
             builder.RegisterType<SqlLocalContext>().As<ISqlLocalContext>().InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(EfCoreRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
