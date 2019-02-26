@@ -4,7 +4,7 @@ using GAM.Infrastructure.Dtos;
 
 namespace GAM.Application.IServices
 {
-    public interface IUserService : IDependency
+    public interface IUserService
     {
          /// <summary>
         /// 登录
