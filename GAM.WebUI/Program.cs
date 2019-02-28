@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Autofac.Extensions.DependencyInjection;
+using GAM.Core.Models.Context;
+using System;
 
 namespace GAM.WebUI
 {
@@ -22,11 +24,14 @@ namespace GAM.WebUI
                 .UseStartup<Startup>()
                 .Build();
 
+            IServiceProvider provide = (IServiceProvider)host.Services.GetService(typeof(SqlLocalContext));
+            //添加初始化数据
+            DbInitialize.Initialize(provide);
             host.Run();
         }
 
-        // public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-        //     WebHost.CreateDefaultBuilder(args)
-        //         .UseStartup<Startup>();
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>();
     }
 }
