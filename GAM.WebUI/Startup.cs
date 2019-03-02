@@ -9,9 +9,9 @@ using Autofac;
 using AutoMapper;
 using Autofac.Extensions.DependencyInjection;
 using GAM.Application;
-using GAM.Core.Models.Context;
-using GAM.Repository.EFCore;
 using GAM.Core.IApi;
+using GAM.Core.Models.Context;
+using GAM.Infrastructure.Repos;
 
 namespace GAM.WebUI
 {
@@ -46,6 +46,7 @@ namespace GAM.WebUI
             services.AddMvc();
             services.AddSession();
             services.AddAutoMapper();
+            services.AddScoped<ISqlLocalContext, SqlLocalContext>();
 
             #region 手动注册
             //DI数据库连接服务
@@ -80,7 +81,7 @@ namespace GAM.WebUI
             //     builder编译IContainer接口对象并赋值ApplicationContainer属性
             //     创建IServiceProvider接口对象并返回
             var builder = new ContainerBuilder();
-            builder.RegisterType<SqlLocalContext>().As<ISqlLocalContext>().InstancePerLifetimeScope();
+            //builder.RegisterType<SqlLocalContext>().As<ISqlLocalContext>().InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(EfCoreRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t=>t.Name.EndsWith("Manage")).AsImplementedInterfaces();
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t=>t.Name.EndsWith("Service")).AsImplementedInterfaces();
@@ -99,7 +100,7 @@ namespace GAM.WebUI
                 app.UseExceptionHandler("/Shared/Error");
 
             //添加初始化数据
-            DbInitialize.Initialize(app.ApplicationServices);
+            //DbInitialize.Initialize(app.ApplicationServices);
             //使用静态文件
             app.UseStaticFiles();
             //启用Session

@@ -6,8 +6,6 @@ namespace GAM.Core.Models.Context
 {
     public class SqlLocalContext: DbContext, ISqlLocalContext
     {
-        public SqlLocalContext() { }
-
         /// <summary>
         /// 方式1：显示调用父类构造函数
         /// </summary>
@@ -16,15 +14,15 @@ namespace GAM.Core.Models.Context
         /// <summary>
         /// 方式2：重写父类OnConfiguring函数读取指定的配置文件
         /// </summary>
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var config = new ConfigurationBuilder()
-                .SetBasePath(System.IO.Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
-            optionsBuilder.UseSqlServer(config.GetConnectionString("SqlConn"));
-            base.OnConfiguring(optionsBuilder);
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    var config = new ConfigurationBuilder()
+        //        .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+        //        .AddJsonFile("appsettings.json")
+        //        .Build();
+        //    optionsBuilder.UseSqlServer(config.GetConnectionString("SqlConn"));
+        //    base.OnConfiguring(optionsBuilder);
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
