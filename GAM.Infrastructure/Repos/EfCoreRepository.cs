@@ -1,20 +1,19 @@
-﻿using System.Linq;
+using System.Linq;
+using Microsoft.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 using GAM.Core.IApi;
 using GAM.Core.Models;
-using Microsoft.EntityFrameworkCore;
 
-namespace GAM.Repository.EFCore
+namespace GAM.Infrastructure.Repos
 {
     public class EfCoreRepository<T> : IRepository<T> where T : BaseEntity, IAggregateRoot
     {
-        //构造函数
-        public EfCoreRepository(ISqlLocalContext icxt)
-        {
-            IContext = icxt;
-        }
-
-        #region ##实现接口
         public ISqlLocalContext IContext { get; }
+
+        public EfCoreRepository(ISqlLocalContext iSqlcontext)
+        {
+            this.IContext = iSqlcontext;
+        }
 
         public IQueryable<T> ModelSet => IContext.Set<T>().AsQueryable();
 
@@ -45,6 +44,5 @@ namespace GAM.Repository.EFCore
         {
             return ModelSet.Where(ispec.Expression);
         }
-        #endregion
     }
 }

@@ -12,8 +12,4 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\GAM.Infrastructure\GAM.Infrastructure.csproj" />
-  </ItemGroup>
-
 </Project>

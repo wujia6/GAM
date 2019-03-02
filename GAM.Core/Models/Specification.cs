@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Linq.Expressions;
 using GAM.Core.IApi;
 
-namespace GAM.Repository.EFCore
+namespace GAM.Core.Models
 {
-    public abstract class Specification<T> : ISpecification<T> where T : class
+    public abstract class Specification<T>: ISpecification<T> where T : class
     {
         public abstract Expression<Func<T, bool>> Expression { get; }
 
