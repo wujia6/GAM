@@ -27,11 +27,11 @@ namespace GAM.WebUI
         /// </summary>
         public Startup(IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
+            var config = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional:true, reloadOnChange:true)
                 .AddEnvironmentVariables();
-            this.Configuration = builder.Build();
+            this.Configuration = config.Build();
             RuleConfigs.Initialize();   //初始化映射器
         }
 
@@ -78,7 +78,7 @@ namespace GAM.WebUI
             //     注册应用层组件服务
             //     将系统服务填充到builder对象
             //     builder编译IContainer接口对象并赋值ApplicationContainer属性
-            //     创建IServiceProvider接口对象并返回对象
+            //     创建IServiceProvider接口对象并返回
             var builder = new ContainerBuilder();
             builder.RegisterType<SqlLocalContext>().As<ISqlLocalContext>().InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(EfCoreRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();

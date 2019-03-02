@@ -6,7 +6,7 @@ using GAM.Infrastructure.Dtos;
 
 namespace GAM.Application.IServices
 {
-    public interface IRoleService : IDependency
+    public interface IRoleService
     {
          #region
         bool AddOrEditAt(RoleDTO model);
