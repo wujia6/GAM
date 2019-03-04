@@ -10,8 +10,9 @@ using AutoMapper;
 using Autofac.Extensions.DependencyInjection;
 using GAM.Application;
 using GAM.Core.IApi;
-using GAM.Core.Models.Context;
 using GAM.Infrastructure.Repos;
+using GAM.Core.Models.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace GAM.WebUI
 {
@@ -46,6 +47,8 @@ namespace GAM.WebUI
             services.AddMvc();
             services.AddSession();
             services.AddAutoMapper();
+            services.AddDbContext<SqlLocalContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("SqlConn")));
 
             #region 手动注册
             //DI数据库连接服务
@@ -80,7 +83,7 @@ namespace GAM.WebUI
             //     builder编译IContainer接口对象并赋值ApplicationContainer属性
             //     创建IServiceProvider接口对象并返回
             var builder = new ContainerBuilder();
-            builder.RegisterType<SqlLocalContext>().As<ISqlLocalContext>();
+            //builder.RegisterType<SqlLocalContext>().As<ISqlLocalContext>().AutoActivate();
             builder.RegisterGeneric(typeof(EfCoreRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t=>t.Name.EndsWith("Manage")).AsImplementedInterfaces();
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t=>t.Name.EndsWith("Service")).AsImplementedInterfaces();
