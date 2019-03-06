@@ -15,11 +15,15 @@ namespace GAM.Core.Models.DepartRoot
 
         public bool AddOrEditAt(Depart model)
         {
+            if (model == null)
+                return false;
             return model.ID > 0 ? iRepos.UpdateAt(model) : iRepos.InsertAt(model);
         }
 
         public bool RemoveAt(Depart model)
         {
+            if (model == null)
+                return false;
             return iRepos.DeleteAt(model);
         }
 

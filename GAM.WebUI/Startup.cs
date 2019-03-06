@@ -32,7 +32,7 @@ namespace GAM.WebUI
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional:true, reloadOnChange:true)
                 .AddEnvironmentVariables();
-            this.Configuration = config.Build();
+            Configuration = config.Build();
             RuleConfigs.Initialize();   //初始化映射器
         }
 
@@ -47,8 +47,7 @@ namespace GAM.WebUI
             services.AddMvc();
             services.AddSession();
             services.AddAutoMapper();
-            services.AddDbContext<SqlLocalContext>(options => 
-                options.UseSqlServer(Configuration.GetConnectionString("SqlConn")));
+            services.AddDbContext<SqlLocalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConn")));
 
             #region 手动注册
             //DI数据库连接服务

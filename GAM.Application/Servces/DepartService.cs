@@ -10,22 +10,24 @@ namespace GAM.Application.Services
     public class DepartService: IDepartService
     {
         private readonly IDepartManage iManage;
+        private readonly ISqlLocalContext iSqlContext;
 
-        public DepartService(IDepartManage imanage)
+        public DepartService(IDepartManage imanage, ISqlLocalContext icxt)
         {
             this.iManage = imanage;
+            this.iSqlContext = icxt;
         }
 
         public bool AddOrEditAt(DepartDTO model)
         {
             var dpt = MapperSupport.MapTo<Depart>(model);
-            return iManage.AddOrEditAt(dpt);
+            return iManage.AddOrEditAt(dpt) ? iSqlContext.SaveChanges() > 0 : false;
         }
 
         public bool RemoveAt(DepartDTO model)
         {
             var entity = MapperSupport.MapTo<Depart>(model);
-            return iManage.RemoveAt(entity);
+            return iManage.RemoveAt(entity) ? iSqlContext.SaveChanges() > 0 : false;
         }
 
         public DepartDTO FindBy(ISpecification<Depart> ispec)

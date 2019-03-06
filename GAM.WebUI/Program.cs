@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using GAM.Core.Models.Context;
-using Autofac.Extensions.DependencyInjection;
-using GAM.Core.IApi;
-using System;
 
 namespace GAM.WebUI
 {
@@ -11,6 +7,7 @@ namespace GAM.WebUI
     {
         public static void Main(string[] args)
         {
+            #region ##autofac集成
             //autofac集成到Asp.net Core中
             //添加Autofac.Extensions.DependencyInjection命名空间引用
             //挂载autofac到startup管道中
@@ -22,6 +19,7 @@ namespace GAM.WebUI
             //    .UseStartup<Startup>()
             //    .Build();
             //host.Run();
+            #endregion
 
             CreateWebHostBuilder(args).Build().Run();
         }
