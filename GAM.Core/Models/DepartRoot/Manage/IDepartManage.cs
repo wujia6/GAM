@@ -7,7 +7,7 @@ namespace GAM.Core.Models.DepartRoot
     public interface IDepartManage
     {
         bool AddOrEditAt(Depart model);
-        bool RemoveAt(Depart model);
+        bool RemoveAt(ISpecification<Depart> ispec);
         Depart FindBy(ISpecification<Depart> ispec);
         IQueryable<Depart> QueryBy(ISpecification<Depart> ispec);
 

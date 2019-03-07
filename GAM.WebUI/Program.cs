@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore;
+﻿using GAM.Core.Models.Context;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace GAM.WebUI

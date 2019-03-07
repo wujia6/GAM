@@ -14,6 +14,8 @@ namespace GAM.Core.Models.MenuRoot
 
         public bool AddOrEditAt(Menu model)
         {
+            if (model==null)
+                return false;
             return model.ID > 0 ? iRepos.UpdateAt(model) : iRepos.InsertAt(model);
         }
 

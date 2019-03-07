@@ -28,17 +28,17 @@ namespace GAM.WebUI
         /// </summary>
         public Startup(IHostingEnvironment env)
         {
-            var config = new ConfigurationBuilder()
+            Configuration = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional:true, reloadOnChange:true)
-                .AddEnvironmentVariables();
-            Configuration = config.Build();
+                .AddEnvironmentVariables()
+                .Build();
             RuleConfigs.Initialize();   //初始化映射器
         }
 
         public IContainer ApplicationContainer { get; private set;}
 
-        public IConfigurationRoot Configuration { get; private set; }
+        public IConfiguration Configuration { get; private set; }
 
         //DI注册容器组件服务
         public IServiceProvider ConfigureServices(IServiceCollection services)
@@ -47,7 +47,8 @@ namespace GAM.WebUI
             services.AddMvc();
             services.AddSession();
             services.AddAutoMapper();
-            services.AddDbContext<SqlLocalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConn")));
+            //services.AddDbContext<SqlLocalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConn")));
+            //services.AddScoped<SqlLocalContext>();
 
             #region 手动注册
             //DI数据库连接服务
@@ -74,20 +75,24 @@ namespace GAM.WebUI
             // 注册方式2：可再program.cs的main()方法内配置WebHostBuilder的地方调用autofac并挂载到startup管道中
             // 说明：
             //     新建autofac的ContainerBuilder对象builder
-            //     注册数据上下文组件服务
+            //     注册数据上下文:先注册options，供DbContext初始化使用
             //     注册仓储层组件服务
             //     注册领域层组件服务
             //     注册应用层组件服务
             //     将系统服务填充到builder对象
             //     builder编译IContainer接口对象并赋值ApplicationContainer属性
             //     创建IServiceProvider接口对象并返回
-            var builder = new ContainerBuilder();
-            //builder.RegisterType<SqlLocalContext>().As<ISqlLocalContext>().AutoActivate();
-            builder.RegisterGeneric(typeof(EfCoreRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t=>t.Name.EndsWith("Manage")).AsImplementedInterfaces();
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t=>t.Name.EndsWith("Service")).AsImplementedInterfaces();
-            builder.Populate(services);
-            this.ApplicationContainer = builder.Build();
+            var cb = new ContainerBuilder();
+            cb.Register(options => 
+                new DbContextOptionsBuilder<SqlLocalContext>()
+                .UseSqlServer(Configuration.GetConnectionString("SqlConn"))
+                .Options).InstancePerLifetimeScope();
+            cb.RegisterType<SqlLocalContext>().As<ISqlLocalContext>().InstancePerLifetimeScope();
+            cb.RegisterGeneric(typeof(EfCoreRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
+            cb.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t=>t.Name.EndsWith("Manage")).AsImplementedInterfaces();
+            cb.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t=>t.Name.EndsWith("Service")).AsImplementedInterfaces();
+            cb.Populate(services);
+            this.ApplicationContainer = cb.Build();
             return new AutofacServiceProvider(ApplicationContainer);
         }
 
@@ -115,6 +120,12 @@ namespace GAM.WebUI
             {
                 await context.Response.WriteAsync("Hello World!");
             });
+
+            using (var scope = ApplicationContainer.BeginLifetimeScope())
+            {
+                var iService = scope.Resolve<ISqlLocalContext>();
+                DbInitialize.Seed(iService);
+            }
         }
     }
 }

@@ -5,9 +5,14 @@
     /// </summary>
     public class DepartFactory
     {
-        public static Depart CreateInstance(string name, string manager, string remark = null)
+        public static Depart CreateInstance(string name, string manager, string remarks = null)
         {
-            var inf = new Depart { Name = name, Manager = manager, Remarks = remark };
+            var inf = new Depart
+            {
+                Name = name,
+                Manager = manager,
+                Remarks = string.IsNullOrEmpty(remarks) ? "暂无" : remarks
+            };
             return inf;
         }
     }

@@ -12,7 +12,7 @@ namespace GAM.Core.Models.UserRoot
         public string Email { get; set; }
         public string Phone { get; set; }
         public DateTime LastLoginTime { get; set; }
-        public bool IsEnable { get; set; }
+        public bool IsEnable { get; set; } = false;
 
         public virtual IQueryable<UserRole> Roles { get; set; }
         public virtual Depart Depart { get; set; }

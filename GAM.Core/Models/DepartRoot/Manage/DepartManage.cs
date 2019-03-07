@@ -20,11 +20,10 @@ namespace GAM.Core.Models.DepartRoot
             return model.ID > 0 ? iRepos.UpdateAt(model) : iRepos.InsertAt(model);
         }
 
-        public bool RemoveAt(Depart model)
+        public bool RemoveAt(ISpecification<Depart> ispec)
         {
-            if (model == null)
-                return false;
-            return iRepos.DeleteAt(model);
+            var model = FindBy(ispec);
+            return model != null ? iRepos.DeleteAt(model) : false;
         }
 
         public Depart FindBy(ISpecification<Depart> ispec)

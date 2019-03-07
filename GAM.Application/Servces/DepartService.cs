@@ -24,10 +24,9 @@ namespace GAM.Application.Services
             return iManage.AddOrEditAt(dpt) ? iSqlContext.SaveChanges() > 0 : false;
         }
 
-        public bool RemoveAt(DepartDTO model)
+        public bool RemoveAt(ISpecification<Depart> ispec)
         {
-            var entity = MapperSupport.MapTo<Depart>(model);
-            return iManage.RemoveAt(entity) ? iSqlContext.SaveChanges() > 0 : false;
+            return iManage.RemoveAt(ispec) ? iSqlContext.SaveChanges() > 0 : false;
         }
 
         public DepartDTO FindBy(ISpecification<Depart> ispec)

@@ -2,15 +2,14 @@
 {
     public class RoleFactory
     {
-        public static Role ClassInstance(string name = null, string code = null, string remarks = null)
+        public static Role ClassInstance(string name, string code, string remarks = null)
         {
-            var role = new Role();
-            if (name != null)
-                role.Name = name;
-            else if (code != null)
-                role.Code = code;
-            else if (remarks != null)
-                role.Remarks = remarks;
+            var role = new Role
+            {
+                Name = name,
+                Code = code,
+                Remarks = string.IsNullOrEmpty(remarks) ? "暂无" : remarks
+            };
             return role;
         }
     }

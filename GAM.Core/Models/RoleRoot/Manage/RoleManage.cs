@@ -16,6 +16,8 @@ namespace GAM.Core.Models.RoleRoot
         #region ##聚合根操作
         public bool AddOrEditAt(Role model)
         {
+            if (model == null)
+                return false;
             return model.ID > 0 ? iRepos.UpdateAt(model) : iRepos.InsertAt(model);
         }
 
