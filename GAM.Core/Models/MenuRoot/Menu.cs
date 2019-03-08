@@ -12,7 +12,7 @@ namespace GAM.Core.Models.MenuRoot
 
     public class Menu: BaseEntity, IAggregateRoot
     {
-        public int PID { get; set; }
+        public int PID { get; set; } = 0;
         public MenuType Type { get; set; } = MenuType.menu;
         public string Name { get; set; }
         public string Code { get; set; }

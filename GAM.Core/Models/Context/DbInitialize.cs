@@ -14,17 +14,17 @@ namespace GAM.Core.Models.Context
         {
             if (icxt.Set<Depart>().Any())
                 return;
-            var depart = DepartFactory.CreateInstance("总部", "管理员");
+            var depart = DepartFactory.CreateInstance(new Guid(), "总部", "管理员");
             icxt.Set<Depart>().Add(depart);
 
             if (icxt.Set<Role>().Any())
                 return;
-            var role = RoleFactory.ClassInstance("管理员", "admin", "系统管理员");
+            var role = RoleFactory.ClassInstance(new Guid(), "管理员", "admin", "系统管理员");
             icxt.Set<Role>().Add(role);
 
             if (icxt.Set<Menu>().Any())
                 return;
-            var menu = MenuFactory.ClassInstance(MenuType.menu, "首页", "Home", "HomeController");
+            var menu = MenuFactory.ClassInstance(new Guid(), MenuType.menu, "首页", "Home", "HomeController");
             icxt.Set<Menu>().Add(menu);
 
             if (icxt.Set<User>().Any())

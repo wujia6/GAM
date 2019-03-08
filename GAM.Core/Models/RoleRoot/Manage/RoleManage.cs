@@ -18,7 +18,7 @@ namespace GAM.Core.Models.RoleRoot
         {
             if (model == null)
                 return false;
-            return model.ID > 0 ? iRepos.UpdateAt(model) : iRepos.InsertAt(model);
+            return model.ID == null ? iRepos.UpdateAt(model) : iRepos.InsertAt(model);
         }
 
         public bool RemoveAt(ISpecification<Role> ispec)

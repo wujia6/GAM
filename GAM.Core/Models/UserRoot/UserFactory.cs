@@ -5,6 +5,7 @@ namespace GAM.Core.Models.UserRoot
     public class UserFactory
     {
         public static User ClassInstance(
+            Guid Id,
             string acc,
             string pwd,
             string name,
@@ -16,6 +17,7 @@ namespace GAM.Core.Models.UserRoot
         {
             User user = new User
             {
+                ID = Id,
                 Account = acc,
                 Password = pwd,
                 Name = name,
