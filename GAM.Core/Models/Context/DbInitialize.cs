@@ -24,12 +24,12 @@ namespace GAM.Core.Models.Context
 
             if (icxt.Set<Menu>().Any())
                 return;
-            var menu = MenuFactory.ClassInstance(new Guid(), MenuType.menu, "首页", "Home", "HomeController");
+            var menu = MenuFactory.ClassInstance(new Guid(), 0, MenuType.menu, "首页", "Home", "HomeController");
             icxt.Set<Menu>().Add(menu);
 
             if (icxt.Set<User>().Any())
                 return;
-            var user = UserFactory.ClassInstance("admin", "password", "wujia", "3887626@qq.com", "16673956869", DateTime.Now, true);
+            var user = UserFactory.ClassInstance(new Guid(), "admin", "password", "wujia", "3887626@qq.com", "16673956869", DateTime.Now, true);
             icxt.Set<User>().Add(user);
 
             icxt.SaveChanges();

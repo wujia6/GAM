@@ -47,8 +47,6 @@ namespace GAM.WebUI
             services.AddMvc();
             services.AddSession();
             services.AddAutoMapper();
-            //services.AddDbContext<SqlLocalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConn")));
-            //services.AddScoped<SqlLocalContext>();
 
             #region 手动注册
             //DI数据库连接服务
@@ -120,7 +118,6 @@ namespace GAM.WebUI
             {
                 await context.Response.WriteAsync("Hello World!");
             });
-
             using (var scope = ApplicationContainer.BeginLifetimeScope())
             {
                 var iService = scope.Resolve<ISqlLocalContext>();
