@@ -68,7 +68,7 @@ namespace GAM.WebUI
             // services.AddScoped<IMenuService, MenuService>();
             // services.AddScoped<IUserService, UserService>();
             #endregion
- 
+
             // autofac方式注册1
             // 注册方式2：可再program.cs的main()方法内配置WebHostBuilder的地方调用autofac并挂载到startup管道中
             // 说明：
@@ -80,7 +80,7 @@ namespace GAM.WebUI
             //     将系统服务填充到builder对象
             //     builder编译IContainer接口对象并赋值ApplicationContainer属性
             //     创建IServiceProvider接口对象并返回
-            var cb = new ContainerBuilder();
+            ContainerBuilder cb = new ContainerBuilder();
             cb.Register(options => 
                 new DbContextOptionsBuilder<SqlLocalContext>()
                 .UseSqlServer(Configuration.GetConnectionString("SqlConn"))
