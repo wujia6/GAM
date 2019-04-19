@@ -2,8 +2,13 @@
 
 namespace GAM.Core.Models.UserRoot
 {
-    public class UserFactory
+    public static class UserFactory
     {
+        public static User GetInstance
+        {
+            get { return new User(); }
+        }
+
         public static User ClassInstance(
             Guid Id,
             string acc,

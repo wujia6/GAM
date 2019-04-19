@@ -2,8 +2,13 @@
 
 namespace GAM.Core.Models.MenuRoot
 {
-    public class MenuFactory
+    public static class MenuFactory
     {
+        public static Menu GetInstance
+        {
+            get { return new Menu(); }
+        }
+
         public static Menu ClassInstance(Guid menuId, int pId, MenuType tp, string name, string code, string url, string remarks = null)
         {
             var menu = new Menu

@@ -6,7 +6,7 @@ using GAM.Infrastructure.Utilities;
 
 namespace GAM.Application.Services
 {
-    public class UserService : IUserService
+    internal class UserService : IUserService
     {
         //领域服务接口对象
         private readonly IUserManage iUserManage;

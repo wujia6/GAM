@@ -4,7 +4,7 @@ using GAM.Core.IApi;
 
 namespace GAM.Core.Models.RoleRoot
 {
-    public class RoleManage: IRoleManage
+    internal class RoleManage: IRoleManage
     {
         private readonly IRepository<Role> iRepos;
 

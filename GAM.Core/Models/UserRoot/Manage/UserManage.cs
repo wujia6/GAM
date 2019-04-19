@@ -4,7 +4,7 @@ using GAM.Core.IApi;
 
 namespace GAM.Core.Models.UserRoot
 {
-    public class UserManage: IUserManage
+    internal class UserManage: IUserManage
     {
         private readonly IRepository<User> iRepos;
 

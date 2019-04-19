@@ -7,7 +7,7 @@ using GAM.Application.IServices;
 
 namespace GAM.Application.Services
 {
-    public class DepartService: IDepartService
+    internal class DepartService: IDepartService
     {
         private readonly IDepartManage iManage;
         private readonly ISqlLocalContext iSqlContext;

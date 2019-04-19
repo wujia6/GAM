@@ -7,7 +7,7 @@ using GAM.Infrastructure.Utilities;
 
 namespace GAM.Application.Services
 {
-    public class MenuService : IMenuService
+    internal class MenuService : IMenuService
     {
         private readonly IMenuManage iManage;
 

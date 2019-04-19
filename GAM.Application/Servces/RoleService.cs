@@ -8,7 +8,7 @@ using GAM.Infrastructure.Utilities;
 
 namespace GAM.Application.Services
 {
-    public class RoleService: IRoleService
+    internal class RoleService: IRoleService
     {
         private readonly IRoleManage iManage;
 

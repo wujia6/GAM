@@ -2,8 +2,13 @@
 
 namespace GAM.Core.Models.RoleRoot
 {
-    public class RoleFactory
+    public static class RoleFactory
     {
+        public static Role GetInstance
+        {
+            get { return new Role(); }
+        }
+
         public static Role ClassInstance(Guid roleId, string name, string code, string remarks = null)
         {
             var role = new Role

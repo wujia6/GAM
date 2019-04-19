@@ -3,7 +3,7 @@ using GAM.Core.IApi;
 
 namespace GAM.Core.Models.MenuRoot
 {
-    public class MenuManage: IMenuManage
+    internal class MenuManage: IMenuManage
     {
         private readonly IRepository<Menu> iRepos;
 

@@ -12,25 +12,25 @@ namespace GAM.Core.Models.Context
     {
         public static void Seed(ISqlLocalContext icxt)
         {
-            if (icxt.Set<Depart>().Any())
+            if (icxt.Departs.Any())
                 return;
             var depart = DepartFactory.CreateInstance(new Guid(), "总部", "管理员");
-            icxt.Set<Depart>().Add(depart);
+            icxt.Departs.Add(depart);
 
-            if (icxt.Set<Role>().Any())
+            if (icxt.Roles.Any())
                 return;
             var role = RoleFactory.ClassInstance(new Guid(), "管理员", "admin", "系统管理员");
-            icxt.Set<Role>().Add(role);
+            icxt.Roles.Add(role);
 
-            if (icxt.Set<Menu>().Any())
+            if (icxt.Menus.Any())
                 return;
             var menu = MenuFactory.ClassInstance(new Guid(), 0, MenuType.menu, "首页", "Home", "HomeController");
-            icxt.Set<Menu>().Add(menu);
+            icxt.Menus.Add(menu);
 
-            if (icxt.Set<User>().Any())
+            if (icxt.Users.Any())
                 return;
             var user = UserFactory.ClassInstance(new Guid(), "admin", "password", "wujia", "3887626@qq.com", "16673956869", DateTime.Now, true);
-            icxt.Set<User>().Add(user);
+            icxt.Users.Add(user);
 
             icxt.SaveChanges();
         }

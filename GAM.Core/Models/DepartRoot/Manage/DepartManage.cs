@@ -4,7 +4,7 @@ using GAM.Core.Models.UserRoot;
 
 namespace GAM.Core.Models.DepartRoot
 {
-    public class DepartManage: IDepartManage
+    internal class DepartManage: IDepartManage
     {
         private readonly IRepository<Depart> iRepos;
 
