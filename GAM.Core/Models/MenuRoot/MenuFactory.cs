@@ -2,6 +2,9 @@
 
 namespace GAM.Core.Models.MenuRoot
 {
+    /// <summary>
+    /// 聚合根工厂类，创建此聚合内所有对象
+    /// </summary>
     public static class MenuFactory
     {
         public static Menu GetInstance

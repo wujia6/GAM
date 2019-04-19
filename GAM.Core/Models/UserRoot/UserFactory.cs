@@ -2,6 +2,9 @@
 
 namespace GAM.Core.Models.UserRoot
 {
+    /// <summary>
+    /// 聚合根工厂类，创建此聚合内所有对象
+    /// </summary>
     public static class UserFactory
     {
         public static User GetInstance
